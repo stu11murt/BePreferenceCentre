@@ -1,0 +1,16 @@
+﻿@model IEnumerable<BePreferenceCentre.DAL.BEMemberList>
+@using BePreferenceCentre.DAL
+@{
+    ViewBag.Title = "GenerateMembers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>GenerateMembers</h2>
+
+@foreach(BEMemberList member in Model)
+{
+<div class="row">
+    <p>@member.Email  - @member.FirstName @member.LastName</p>
+</div>
+}
+

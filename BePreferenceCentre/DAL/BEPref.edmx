@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BePreferencesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BEMailingLists">
+          <Key>
+            <PropertyRef Name="MailingListsId" />
+          </Key>
+          <Property Name="MailingListsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ListId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ListName" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="MemberCount" Type="int" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" Nullable="false" />
+          <Property Name="ShowUser" Type="bit" Nullable="false" />
+          <Property Name="ImageURL" Type="nvarchar" MaxLength="512" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BEMemberList">
+          <Key>
+            <PropertyRef Name="BEMemberMailingId" />
+          </Key>
+          <Property Name="BEMemberMailingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="AccessToken" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="ListId" Type="nvarchar" MaxLength="512" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="BePreferencesModelStoreContainer">
+          <EntitySet Name="BEMailingLists" EntityType="Self.BEMailingLists" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BEMemberList" EntityType="Self.BEMemberList" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BePreferencesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="BePreferencesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BEMailingLists" EntityType="BePreferencesModel.BEMailingList" />
+          <EntitySet Name="BEMemberLists" EntityType="BePreferencesModel.BEMemberList" />
+        </EntityContainer>
+        <EntityType Name="BEMailingList">
+          <Key>
+            <PropertyRef Name="MailingListsId" />
+          </Key>
+          <Property Name="MailingListsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ListId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ListName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="MemberCount" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ShowUser" Type="Boolean" Nullable="false" />
+          <Property Name="ImageURL" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="BEMemberList">
+          <Key>
+            <PropertyRef Name="BEMemberMailingId" />
+          </Key>
+          <Property Name="BEMemberMailingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="AccessToken" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ListId" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BePreferencesModelStoreContainer" CdmEntityContainer="BePreferencesEntities">
+          <EntitySetMapping Name="BEMailingLists">
+            <EntityTypeMapping TypeName="BePreferencesModel.BEMailingList">
+              <MappingFragment StoreEntitySet="BEMailingLists">
+                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
+                <ScalarProperty Name="ShowUser" ColumnName="ShowUser" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="MemberCount" ColumnName="MemberCount" />
+                <ScalarProperty Name="ListName" ColumnName="ListName" />
+                <ScalarProperty Name="ListId" ColumnName="ListId" />
+                <ScalarProperty Name="MailingListsId" ColumnName="MailingListsId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BEMemberLists">
+            <EntityTypeMapping TypeName="BePreferencesModel.BEMemberList">
+              <MappingFragment StoreEntitySet="BEMemberList">
+                <ScalarProperty Name="ListId" ColumnName="ListId" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="AccessToken" ColumnName="AccessToken" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="BEMemberMailingId" ColumnName="BEMemberMailingId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
