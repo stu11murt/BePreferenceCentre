@@ -6,7 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="2a21a37decd1427e9e77c7378936753d" Name="Diagram1">
         <EntityTypeShape EntityType="BePreferencesModel.BEMailingList" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="BePreferencesModel.BEMemberList" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BePreferencesModel.BEMemberList" Width="1.5" PointX="3.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

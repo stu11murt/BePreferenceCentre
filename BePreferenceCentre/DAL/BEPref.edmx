@@ -28,6 +28,7 @@
           <Property Name="AccessToken" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Created" Type="datetime" Nullable="false" />
           <Property Name="ListId" Type="nvarchar" MaxLength="512" Nullable="false" />
+          <Property Name="Archived" Type="bit" Nullable="false" />
         </EntityType>
         <EntityContainer Name="BePreferencesModelStoreContainer">
           <EntitySet Name="BEMailingLists" EntityType="Self.BEMailingLists" Schema="dbo" store:Type="Tables" />
@@ -64,6 +65,7 @@
           <Property Name="AccessToken" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ListId" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="Archived" Type="Boolean" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -87,6 +89,7 @@
           <EntitySetMapping Name="BEMemberLists">
             <EntityTypeMapping TypeName="BePreferencesModel.BEMemberList">
               <MappingFragment StoreEntitySet="BEMemberList">
+                <ScalarProperty Name="Archived" ColumnName="Archived" />
                 <ScalarProperty Name="ListId" ColumnName="ListId" />
                 <ScalarProperty Name="Created" ColumnName="Created" />
                 <ScalarProperty Name="AccessToken" ColumnName="AccessToken" />

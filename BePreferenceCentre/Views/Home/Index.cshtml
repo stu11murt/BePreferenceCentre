@@ -22,14 +22,14 @@
                         <div class="card-body">
                             <h5 class="card-title">@mlist.MailingList.ListName</h5>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            @if (!mlist.Subscribed)
-                            {
-                                <a href="@Url.Action("SubscribeUser", new { listId = mlist.MailingList.ListId, currentlistId = Model.CurrentlySubscribedListId, email = @Model.Email })" class="btn btn-primary">Subscribe</a>
-                            }
-                            else
-                            {
-                                <a href="#" class="btn btn-danger">Un-Subscribe</a>
-                            }
+                        @if (!mlist.Subscribed)
+                        {
+                                <a href="@Url.Action("SubscribeUser", new { listId = mlist.MailingList.ListId, email = @Model.Email })" class="btn btn-primary">Subscribe</a>
+                        }
+                        else
+                        {
+                              <a href="@Url.Action("UnsubscribeUser", new { listId = mlist.MailingList.ListId, email = @Model.Email })" class="btn btn-danger">Un-Subscribe</a>
+                        }
 
                         </div>
                     </div>

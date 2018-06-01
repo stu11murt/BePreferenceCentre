@@ -8,6 +8,7 @@ using BePreferenceCentre.ViewModels;
 using System.Threading.Tasks;
 using MailChimp.Net.Interfaces;
 using MailChimp.Net;
+using MailChimp.Net.Logic;
 using BePreferenceCentre.Models;
 
 namespace BePreferenceCentre.Controllers
@@ -15,6 +16,7 @@ namespace BePreferenceCentre.Controllers
     public class HomeController : Controller
     {
         private const string APIKEY = "beca8f48a27a32cdea3915e187823788-us16";
+        IMailChimpManager manager = new MailChimpManager(APIKEY);
 
         public HomeController()
         {
@@ -35,7 +37,7 @@ namespace BePreferenceCentre.Controllers
             {
                 UserSubscribedtoListViewModel beMaiList = new UserSubscribedtoListViewModel();
 
-                if (listsMemberof.FirstOrDefault(m => m.ListId == mlist.ListId) != null)
+                if (listsMemberof.FirstOrDefault(m => m.ListId == mlist.ListId && m.Archived == false) != null)
                 {
                     beMaiList.Subscribed = true;
                     mailListOptions.CurrentlySubscribedListId = mlist.ListId;
@@ -59,9 +61,9 @@ namespace BePreferenceCentre.Controllers
 
         public async Task<ActionResult> GetMailingLists()
         {
-            IMailChimpManager manager = new MailChimpManager(APIKEY);
+            
 
-            var mailChimpListCollection = await manager.Lists.GetAllAsync().ConfigureAwait(false);
+            var mailChimpListCollection = await this.manager.Lists.GetAllAsync().ConfigureAwait(false);
 
             foreach (MailChimp.Net.Models.List lst in mailChimpListCollection)
             {
@@ -85,22 +87,66 @@ namespace BePreferenceCentre.Controllers
             return View(vwMod);
         }
 
-        public async Task<ActionResult> SubscribeUser(string listId,string currentlistId, string email)
+        public async Task<ActionResult> SubscribeUser(string listId, string email)
         {
             try
             {
-                if (listId == "NA")
-                    return Content("error");
+                 if (listId == "NA")
+                        return Content("error");
 
-                IMailChimpManager manager = new MailChimpManager(APIKEY);
-                MailChimp.Net.Models.Member memberToSubscribe = await GetMember(currentlistId, email);
+                    using (var db = new BePreferencesEntities())
+                    {
+                        if (db.BEMemberLists.FirstOrDefault(m => m.Email == email && m.ListId == listId && m.Archived == true) != null)
+                        {
+                            BEMemberList member = db.BEMemberLists.FirstOrDefault(e => e.Email == email && e.ListId == listId);
+                            if (member != null)
+                            {
+                                // MailChimp.Net.Models.Member memberToSubscribe = await GetMember(currentlistId, email);
+                                var newMember = new MailChimp.Net.Models.Member { EmailAddress = email, StatusIfNew = MailChimp.Net.Models.Status.Subscribed };
 
-                bool completed = manager.Members.AddOrUpdateAsync(listId, memberToSubscribe).IsCompleted;
+                                newMember.MergeFields.Add("FNAME", member.FirstName);
+                                newMember.MergeFields.Add("LNAME", member.LastName);
+                                newMember.MergeFields.Add("FULLNAME", member.FirstName + " " + member.LastName);
+
+                                await this.manager.Members.AddOrUpdateAsync(listId, newMember);
+                                ReInstateMemberToDatabase(member);
+
+
+                                return RedirectToAction("Index", new { email = member.Email });
+                            }
+                            else
+                            {
+                                return RedirectToAction("Index", new { email = email });
+                            }
+                        }
+                        else
+                        {
+
+
+                            BEMemberList member = db.BEMemberLists.FirstOrDefault(e => e.Email == email);
+                            if (member != null)
+                            {
+                                // MailChimp.Net.Models.Member memberToSubscribe = await GetMember(currentlistId, email);
+                                var newMember = new MailChimp.Net.Models.Member { EmailAddress = email, StatusIfNew = MailChimp.Net.Models.Status.Subscribed };
+
+                                newMember.MergeFields.Add("FNAME", member.FirstName);
+                                newMember.MergeFields.Add("LNAME", member.LastName);
+                                newMember.MergeFields.Add("FULLNAME", member.FirstName + " " + member.LastName);
+
+                                await this.manager.Members.AddOrUpdateAsync(listId, newMember);
+                                AddMemberToDatabase(member, listId);
+
+
+                                return RedirectToAction("Index", new { email = member.Email });
+                            }
+                            else
+                            {
+                                return RedirectToAction("Index", new { email = email });
+                            }
+                        }
+                       
+                    }
                 
-                if (completed)
-                    return RedirectToAction("Index", new { email = "stu11murt@gmail.com" });
-                else
-                    return Content("error");
             }
             catch (Exception ex)
             {
@@ -109,24 +155,100 @@ namespace BePreferenceCentre.Controllers
             }
         }
 
+        private void AddMemberToDatabase(BEMemberList member, string newListId)
+        {
+            try
+            {
+                using(var db = new BePreferencesEntities())
+                {
+                    BEMemberList newMember = new BEMemberList
+                    {
+                        Email = member.Email,
+                        FirstName = member.FirstName,
+                        LastName = member.LastName,
+                        AccessToken = member.AccessToken,
+                        Created = DateTime.Now,
+                        ListId = newListId
+                    };
+
+                    db.BEMemberLists.Add(newMember);
+                    db.SaveChanges();
+                    
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+        private void ReInstateMemberToDatabase(BEMemberList member)
+        {
+            try
+            {
+                using (var db = new BePreferencesEntities())
+                {
+                    member.Archived = false;
+
+                    db.Entry(member).State = System.Data.Entity.EntityState.Modified;
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public async Task<ActionResult> UnsubscribeUser(string listId, string email)
         {
             try
             {
                 IMailChimpManager manager = new MailChimpManager(APIKEY);
-                MailChimp.Net.Models.Member memberToSubscribe = await GetMember(listId, email);
 
-                bool completed = manager.Members.DeleteAsync(listId, memberToSubscribe.EmailAddress).IsCompleted;
+                using (var db = new BePreferencesEntities())
+                {
+                    BEMemberList member = db.BEMemberLists.FirstOrDefault(e => e.Email == email);
+                    if (member != null)
+                    {
+                        await this.manager.Members.DeleteAsync(listId, member.Email);
+                                                
+                    }
 
-                if (completed)
+                    RemoveMemberToDatabase(member, listId);
+                    
                     return RedirectToAction("Index", new { email = "stu11murt@gmail.com" });
-                else
-                    return Content("false");
+                }
+                
             }
             catch (Exception ex)
             {
 
                 throw ex;
+            }
+        }
+
+        private void RemoveMemberToDatabase(BEMemberList member, string newListId)
+        {
+            try
+            {
+                using (var db = new BePreferencesEntities())
+                {
+                    member.ListId = newListId;
+                    member.Archived = true;
+
+                    db.Entry(member).State = System.Data.Entity.EntityState.Modified;
+                    db.SaveChanges();
+
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
 

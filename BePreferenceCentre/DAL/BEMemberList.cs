@@ -21,5 +21,6 @@ namespace BePreferenceCentre.DAL
         public string AccessToken { get; set; }
         public System.DateTime Created { get; set; }
         public string ListId { get; set; }
+        public bool Archived { get; set; }
     }
 }
