@@ -9,7 +9,7 @@ namespace BePreferenceCentre.ViewModels
     public class MailingListOptionsViewModel
     {
        public string Email { get; set; }
-        public string CurrentlySubscribedListId { get; set; }
+       public string CurrentlySubscribedListId { get; set; }
 
        public List<BEMailingList> MailingListMembers { get; set; }
 

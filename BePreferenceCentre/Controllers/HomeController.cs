@@ -10,6 +10,8 @@ using MailChimp.Net.Interfaces;
 using MailChimp.Net;
 using MailChimp.Net.Logic;
 using BePreferenceCentre.Models;
+using BePreferenceCentre.Helpers;
+
 
 namespace BePreferenceCentre.Controllers
 {
@@ -23,15 +25,18 @@ namespace BePreferenceCentre.Controllers
 
         }
 
-        public ActionResult Index(string email = "stu11murt@gmail.com")
+        [HttpGet]
+        public ActionResult Index(string x4p = "stu11murt@gmail.com")
         {
+            //add salt to database of mailing list members then email all at once
+            string decryptEmail = EncryptionHelper.DecryptRijndael(x4p, )
             List<UserSubscribedtoListViewModel> userModel = new List<UserSubscribedtoListViewModel>();
             MailingListOptionsViewModel mailListOptions = new MailingListOptionsViewModel();
             mailListOptions.CurrentlySubscribedListId = "NA";
 
             BePreferencesEntities db = new BePreferencesEntities();
 
-            List<BEMemberList> listsMemberof = db.BEMemberLists.Where(u => u.Email == email).ToList();
+            List<BEMemberList> listsMemberof = db.BEMemberLists.Where(u => u.Email == decryptEmail).ToList();
 
             foreach (BEMailingList mlist in db.BEMailingLists.ToList())
             {
@@ -62,7 +67,6 @@ namespace BePreferenceCentre.Controllers
         public async Task<ActionResult> GetMailingLists()
         {
             
-
             var mailChimpListCollection = await this.manager.Lists.GetAllAsync().ConfigureAwait(false);
 
             foreach (MailChimp.Net.Models.List lst in mailChimpListCollection)
@@ -72,7 +76,7 @@ namespace BePreferenceCentre.Controllers
                     ListName = lst.Name,
                     ListId = lst.Id,
                     MemberCount = lst.Stats.MemberCount,
-                    LastUpdated = DateTime.Now
+                    LastUpdated = DateTime.Now                    
                 };
 
                 BePreferencesEntities db = new BePreferencesEntities();
@@ -301,5 +305,10 @@ namespace BePreferenceCentre.Controllers
 
             return View(newMemberList);
         }
+
+        //public async Task<ActionResult> GenerateGDRPList()
+        //{
+
+        //}
     }
 }

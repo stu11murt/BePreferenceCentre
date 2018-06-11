@@ -21,5 +21,7 @@ namespace BePreferenceCentre.DAL
         public System.DateTime LastUpdated { get; set; }
         public bool ShowUser { get; set; }
         public string ImageURL { get; set; }
+        public string ListCopy { get; set; }
+        public string ListDescription { get; set; }
     }
 }
