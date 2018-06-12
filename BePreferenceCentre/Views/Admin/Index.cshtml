@@ -13,7 +13,8 @@
 
 <div class="container">
     <div class="row">
-        <a href="@Url.Action("SendSimpleEmail", "Admin", null)" class="btn btn-primary">Send Email</a>
+        <a href="@Url.Action("SendSimpleEmail", "Admin", new { email = "stuart@deepbluedevelopment.co.uk" })" class="btn btn-primary">Send Email</a><br />
+        <a href="@Url.Action("UpdateMemberListWithSalt", "Admin", null)" class="btn btn-primary">Update Member List with Salt</a>
         @*@foreach (UserSubscribedtoListViewModel mlist in Model.MailingLists)
         {
             if (mlist.MailingList.ShowUser)

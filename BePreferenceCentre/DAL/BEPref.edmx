@@ -41,22 +41,9 @@
     <edmx:ConceptualModels>
       <Schema Namespace="BePreferencesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="BePreferencesEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="BEMemberLists" EntityType="BePreferencesModel.BEMemberList" />
           <EntitySet Name="BEMailingLists" EntityType="BePreferencesModel.BEMailingList" />
+          <EntitySet Name="BEMemberLists" EntityType="BePreferencesModel.BEMemberList" />
         </EntityContainer>
-        <EntityType Name="BEMemberList">
-          <Key>
-            <PropertyRef Name="BEMemberMailingId" />
-          </Key>
-          <Property Name="BEMemberMailingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="LastName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="AccessToken" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ListId" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
-          <Property Name="Archived" Type="Boolean" Nullable="false" />
-        </EntityType>
         <EntityType Name="BEMailingList">
           <Key>
             <PropertyRef Name="MailingListsId" />
@@ -71,26 +58,25 @@
           <Property Name="ListCopy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ListDescription" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="BEMemberList">
+          <Key>
+            <PropertyRef Name="BEMemberMailingId" />
+          </Key>
+          <Property Name="BEMemberMailingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="AccessToken" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ListId" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="Archived" Type="Boolean" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="BePreferencesModelStoreContainer" CdmEntityContainer="BePreferencesEntities">
-          <EntitySetMapping Name="BEMemberLists">
-            <EntityTypeMapping TypeName="BePreferencesModel.BEMemberList">
-              <MappingFragment StoreEntitySet="BEMemberList">
-                <ScalarProperty Name="Archived" ColumnName="Archived" />
-                <ScalarProperty Name="ListId" ColumnName="ListId" />
-                <ScalarProperty Name="Created" ColumnName="Created" />
-                <ScalarProperty Name="AccessToken" ColumnName="AccessToken" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="BEMemberMailingId" ColumnName="BEMemberMailingId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="BEMailingLists">
             <EntityTypeMapping TypeName="BePreferencesModel.BEMailingList">
               <MappingFragment StoreEntitySet="BEMailingLists">
@@ -103,6 +89,20 @@
                 <ScalarProperty Name="ListName" ColumnName="ListName" />
                 <ScalarProperty Name="ListId" ColumnName="ListId" />
                 <ScalarProperty Name="MailingListsId" ColumnName="MailingListsId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BEMemberLists">
+            <EntityTypeMapping TypeName="BePreferencesModel.BEMemberList">
+              <MappingFragment StoreEntitySet="BEMemberList">
+                <ScalarProperty Name="Archived" ColumnName="Archived" />
+                <ScalarProperty Name="ListId" ColumnName="ListId" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="AccessToken" ColumnName="AccessToken" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="BEMemberMailingId" ColumnName="BEMemberMailingId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

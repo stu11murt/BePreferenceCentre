@@ -25,7 +25,7 @@ namespace BePreferenceCentre.DAL
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<BEMemberList> BEMemberLists { get; set; }
         public virtual DbSet<BEMailingList> BEMailingLists { get; set; }
+        public virtual DbSet<BEMemberList> BEMemberLists { get; set; }
     }
 }

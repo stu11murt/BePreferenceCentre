@@ -5,6 +5,7 @@ using System.Web;
 using System.Net.Mail;
 using System.Net;
 
+
 namespace BePreferenceCentre.Helpers
 {
     public static class SimpleEmailSender
@@ -44,16 +45,24 @@ namespace BePreferenceCentre.Helpers
             "BE for Beauty test email sent from BE Preference centre";
 
         // The body of the email
-        const String BODY =
-            "<h1>BE Preference Centre Test</h1>" +
-            "<p>This email was sent through the " +
-            "<a href='https://aws.amazon.com/ses'>Amazon SES</a> SMTP interface " +
-            "using the .NET System.Net.Mail library.</p>";
+        //const String BODY =
+        //    "<h1>BE Preference Centre Test</h1>" +
+        //    "<p>This email was sent through the " +
+        //    "<a href='https://aws.amazon.com/ses'>Amazon SES</a> SMTP interface " +
+        //    "using the .NET System.Net.Mail library.</p>";
 
 
 
-        public static void SendSimpleEmail(string mailTo)
+        public static void SendSimpleEmail(string mailTo, string encryptedMail)
         {
+            
+            // The body of the email
+            String BODY =
+                "<h1>BE Preference Centre Test</h1>" +
+                "<p>This email was sent through the " +
+                "<a href='http://localhost:57897?x4p="+ encryptedMail + "'>Update Preferences</a>" +
+                "using the .NET System.Net.Mail library.</p>";
+
 
             // Create and build a new MailMessage object
             MailMessage message = new MailMessage();

@@ -11,6 +11,7 @@ using MailChimp.Net;
 using MailChimp.Net.Logic;
 using BePreferenceCentre.Models;
 using BePreferenceCentre.Helpers;
+using System.Net;
 
 
 namespace BePreferenceCentre.Controllers
@@ -28,15 +29,18 @@ namespace BePreferenceCentre.Controllers
         [HttpGet]
         public ActionResult Index(string x4p = "stu11murt@gmail.com")
         {
-            //add salt to database of mailing list members then email all at once
-            string decryptEmail = EncryptionHelper.DecryptRijndael(x4p, )
+            if (x4p != "stu11murt@gmail.com")
+            {
+                string decrypted = EncryptionHelper.DecryptRijndael(x4p);
+            }
+
             List<UserSubscribedtoListViewModel> userModel = new List<UserSubscribedtoListViewModel>();
             MailingListOptionsViewModel mailListOptions = new MailingListOptionsViewModel();
             mailListOptions.CurrentlySubscribedListId = "NA";
 
             BePreferencesEntities db = new BePreferencesEntities();
 
-            List<BEMemberList> listsMemberof = db.BEMemberLists.Where(u => u.Email == decryptEmail).ToList();
+            List<BEMemberList> listsMemberof = db.BEMemberLists.Where(u => u.Email == x4p).ToList();
 
             foreach (BEMailingList mlist in db.BEMailingLists.ToList())
             {
@@ -56,7 +60,7 @@ namespace BePreferenceCentre.Controllers
                 userModel.Add(beMaiList);
             }
 
-            mailListOptions.Email = email;
+            mailListOptions.Email = x4p;
             mailListOptions.MailingLists = userModel;
             mailListOptions.MailingListMembers = db.BEMailingLists.ToList();
 
@@ -64,6 +68,7 @@ namespace BePreferenceCentre.Controllers
             return View(mailListOptions);
         }
 
+        
         public async Task<ActionResult> GetMailingLists()
         {
             
@@ -295,6 +300,7 @@ namespace BePreferenceCentre.Controllers
                         AccessToken = Guid.NewGuid().ToString(),
                         Created = DateTime.Now,
                         ListId = member.ListId
+                       
 
                     };
 

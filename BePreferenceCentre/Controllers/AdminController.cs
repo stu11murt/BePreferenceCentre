@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Security.Cryptography;
 using BePreferenceCentre.Helpers;
+using BePreferenceCentre.DAL;
 
 namespace BePreferenceCentre.Controllers
 {
@@ -19,12 +20,18 @@ namespace BePreferenceCentre.Controllers
         }
 
 
-        public ActionResult SendSimpleEmail()
+        public ActionResult SendSimpleEmail(string email)
         {
-            SimpleEmailSender.SendSimpleEmail("stu11murt@gmail.com");
 
-            var encryption = EncryptionHelper.EncryptRijndael("stu11murt@gmail.com", Guid.NewGuid().ToString());
+           string encryptEmail = EncryptionHelper.EncryptRijndael(email);
+
+            SimpleEmailSender.SendSimpleEmail(email, HttpUtility.UrlEncode(encryptEmail));
+            
             return View();
         }
+
+
+               
+
     }
 }
