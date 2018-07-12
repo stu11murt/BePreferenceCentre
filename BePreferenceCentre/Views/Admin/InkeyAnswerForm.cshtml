@@ -1,0 +1,125 @@
+﻿@model BePreferenceCentre.ViewModels.InkeyViewModel
+@using BePreferenceCentre.DAL;
+@{
+    ViewBag.Title = "InkeyAnswerForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="jumbotron" id="inkey-jumbo">
+   
+</div>
+
+<div class="container">
+    <div class="content animate-panel">
+        @using (Html.BeginForm("InkeyAnswerForm", "Admin", null, FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+
+            <div class="row">
+                <div class="col-lg-12 col-md-8 col-sm-12">
+                    <div class="hpanel">
+                        <div class="panel-heading">
+                            <div class="panel-tools">
+                                <a class="showhide"><i class="fa fa-chevron-up"></i></a>
+
+                            </div>
+                          
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.answer.Question, new { @class = "col-sm-2 control-label" })
+                                <div class="col-sm-12">
+                                    @Html.TextAreaFor(m => m.answer.Question, new { @class = "form-control boxsizingBorder" })
+
+                                </div>
+                            </div>
+                            <div class="col-sm-offset-2">
+                                @Html.ValidationMessageFor(m => m.answer.Question, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.answer.Answer, new { @class = "col-sm-2 control-label" })
+                                <div class="col-sm-12">
+                                    @Html.TextAreaFor(m => m.answer.Answer, new { @class = "form-control boxsizingBorder" })
+
+                                </div>
+                            </div>
+                            <div class="col-sm-offset-2">
+                                @Html.ValidationMessageFor(m => m.answer.Answer, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.answer.ProductImageLink, new { @class = "col-sm-2 control-label" })
+                                <div class="col-sm-6">
+                                    @Html.TextBoxFor(m => m.answer.ProductImageLink, new { @class = "form-control boxsizingBorder" })
+
+                                </div>
+                            </div>
+                            <div class="col-sm-offset-2">
+                                @Html.ValidationMessageFor(m => m.answer.ProductImageLink, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.answer.ProductLink, new { @class = "col-sm-2 control-label" })
+                                <div class="col-sm-6">
+                                    @Html.TextBoxFor(m => m.answer.ProductLink, new { @class = "form-control boxsizingBorder" })
+
+                                </div>
+                            </div>
+                            <div class="col-sm-offset-2">
+                                @Html.ValidationMessageFor(m => m.answer.ProductLink, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="row col-lg-12">
+                <table class="table-striped" cellpadding="10">
+                    <thead>
+                        <tr>
+                            <th>Answer</th>
+                            <th>Product Link</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (InkeyAnswer answer in Model.InkeyAnswers)
+                        {
+                            Html.RenderPartial("Partials/_inkeyAnswers", answer);
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+
+
+            <div class="row col-lg-12 ink-buttons">
+
+                <div class="col-lg-6">
+                        <input type="submit" class="btn btn-lg btn-primary" value="Submit Booking" id="subbtn" />
+                </div>
+                <div class="col-lg-6">
+                    <a href="@Url.Action("InkeyHelp", "Admin")" class="btn btn-lg btn-info float-right" id="inkeyHelper">Inkey Helper</a>
+                </div>
+
+            </div>
+
+        }
+    </div>
+</div>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+
+    $(document).ready(function () {
+        $('#answer_Question').val("");
+        $('#answer_Answer').val("");
+        $('#answer_ProductImageLink').val("");
+        $('#answer_ProductLink').val("");
+    });
+
+</script>

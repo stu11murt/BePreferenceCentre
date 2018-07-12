@@ -36,3 +36,48 @@ textarea {
     background-image: url("../Images/tan-hero-banner-min.jpg");
     background-size: cover;
 }
+
+#inkey-jumbo {
+    background-image: url("../Images/inkey.jpg");
+    background-size: cover;
+    height:400px;
+}
+
+#inkey-row {
+    display:block;
+       
+}
+
+
+.inkey-question {
+    max-width:100%!important;
+}
+
+#inkey-results-row {
+    margin-top:50px;
+    font-size:25px;
+}
+
+#inkey-button {
+    margin-top: 50px;
+}
+
+#inkey-results {
+    height: 100px;
+}
+
+
+.ink-buttons {
+    margin-top: 50px;
+}
+
+.big-txt{
+    width:100%;
+}
+
+.boxsizingBorder {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    max-width:100%!important;
+}

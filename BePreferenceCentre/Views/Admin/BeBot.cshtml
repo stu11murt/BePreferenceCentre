@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "BeBot";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>BeBot</h2>
+
+<div class="row">
+    <div class="col-6">
+
+        <script src="https://lex-web-ui-inkey-codebuilddeploy-1qd-webappbucket-1kfvm4ynofp5c.s3.amazonaws.com/lex-web-ui-loader.min.js"></script>
+        <script>
+            var loaderOpts = {
+                baseUrl: 'https://lex-web-ui-inkey-codebuilddeploy-1qd-webappbucket-1kfvm4ynofp5c.s3.amazonaws.com/'
+            };
+            var loader = new ChatBotUiLoader.IframeLoader(loaderOpts);
+            loader.load()
+                .catch(function (error) { console.error(error); });
+        </script>
+
+    </div>
+</div>
+

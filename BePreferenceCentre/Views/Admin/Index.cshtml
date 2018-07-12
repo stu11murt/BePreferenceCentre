@@ -1,11 +1,12 @@
-﻿
+﻿@model BePreferenceCentre.ViewModels.MailingListOptionsViewModel
+@using BePreferenceCentre.ViewModels
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
-<div class="jumbotron">
+<div  class="jumbotron">
     <h1>BE</h1>
     <h1>FOR</h1>
     <h1>BEAUTY</h1>
@@ -13,9 +14,8 @@
 
 <div class="container">
     <div class="row">
-        <a href="@Url.Action("SendSimpleEmail", "Admin", new { email = "stuart@deepbluedevelopment.co.uk" })" class="btn btn-primary">Send Email</a><br />
-        <a href="@Url.Action("UpdateMemberListWithSalt", "Admin", null)" class="btn btn-primary">Update Member List with Salt</a>
-        @*@foreach (UserSubscribedtoListViewModel mlist in Model.MailingLists)
+
+        @foreach (UserSubscribedtoListViewModel mlist in Model.MailingLists)
         {
             if (mlist.MailingList.ShowUser)
             {
@@ -26,18 +26,21 @@
                             <h5 class="card-title">@mlist.MailingList.ListName</h5>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                             @if (!mlist.Subscribed)
-                            {
-                                <a href="@Url.Action("SubscribeUser", new { listId = mlist.MailingList.ListId, email = @Model.Email })" class="btn btn-primary">Subscribe</a>
-                            }
-                            else
-                            {
-                                <a href="@Url.Action("UnsubscribeUser", new { listId = mlist.MailingList.ListId, email = @Model.Email })" class="btn btn-danger">Un-Subscribe</a>
-                            }
+                        {
+                            <a href="@Url.Action("SubscribeUser", new { listId = mlist.MailingList.ListId, email = @Model.Email })" class="btn btn-primary">Subscribe</a>
+                    }
+                    else
+                    {
+                            <a href="@Url.Action("UnsubscribeUser", new { listId = mlist.MailingList.ListId, email = @Model.Email })" class="btn btn-danger">Un-Subscribe</a>
+                    }
 
                         </div>
                     </div>
                 </div>
             }
-        }*@
+        }
+
+        <a href="@Url.Action("SendSimpleEmail", "Admin", new { email = "stuart@deepbluedevelopment.co.uk" })" class="btn btn-primary">Send Email</a><br />
+        <a href="@Url.Action("UpdateMemberListWithSalt", "Admin", null)" class="btn btn-primary">Update Member List with Salt</a>
     </div>
 </div>

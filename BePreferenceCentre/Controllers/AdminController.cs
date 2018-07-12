@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using System.Security.Cryptography;
 using BePreferenceCentre.Helpers;
 using BePreferenceCentre.DAL;
+using BePreferenceCentre.ViewModels;
+using BePreferenceCentre.ActionFilters;
 
 namespace BePreferenceCentre.Controllers
 {
@@ -16,7 +18,31 @@ namespace BePreferenceCentre.Controllers
         // GET: Admin
         public ActionResult Index()
         {
-            return View();
+           
+            List<UserSubscribedtoListViewModel> userModel = new List<UserSubscribedtoListViewModel>();
+            MailingListOptionsViewModel mailListOptions = new MailingListOptionsViewModel();
+            mailListOptions.CurrentlySubscribedListId = "NA";
+
+            BePreferencesEntities db = new BePreferencesEntities();
+
+            List<BEMailingList> list = db.BEMailingLists.ToList();
+
+            foreach(BEMailingList mlist in list)
+            {
+                UserSubscribedtoListViewModel beMaiList = new UserSubscribedtoListViewModel();
+
+                beMaiList.MailingList = mlist;
+
+                userModel.Add(beMaiList);
+            }
+
+           
+            mailListOptions.MailingLists = userModel;
+            mailListOptions.MailingListMembers = db.BEMailingLists.ToList();
+
+
+            return View(mailListOptions);
+           
         }
 
 
@@ -31,7 +57,51 @@ namespace BePreferenceCentre.Controllers
         }
 
 
-               
+        [AllowCORSFilter]
+        public ActionResult BeBot()
+        {
+            return View();
+        }
+        
+        public ActionResult InkeyHelp()
+        {
+            InkeyViewModel inkViewMod = new InkeyViewModel();
+            return View(inkViewMod);
+        }
+
+        public ActionResult InkeySearch()
+        {
+            InkeyViewModel inkViewMod = new InkeyViewModel();
+            return View(inkViewMod);
+        }
+
+
+        public ActionResult InkeyAnswerForm()
+        {
+            InkeyViewModel inkViewMod = new InkeyViewModel();
+            return View(inkViewMod);
+        }
+
+        [HttpPost]
+        public ActionResult InkeyAnswerForm(InkeyViewModel inkMod)
+        {
+            try
+            {
+                InkeyAnswer newAns = inkMod.answer;
+                using(var db = new BePreferencesEntities())
+                {
+                    db.InkeyAnswers.Add(newAns);
+                    db.SaveChanges();
+
+                    return View(new InkeyViewModel());
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
 
     }
 }

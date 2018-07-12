@@ -1,0 +1,104 @@
+﻿@model BePreferenceCentre.ViewModels.InkeyViewModel
+@{
+    ViewBag.Title = "InkeySearch";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.HiddenFor(m => m.InkeyJsonAnswers)
+<div class="jumbotron" id="inkey-jumbo">
+
+</div>
+
+<div class="container inkey-container">
+    <div class="row" id="inkey-row">
+
+        <div class="input-group col=lg-12">
+            <input type="text" class="form-control inkey-question" placeholder="ask us anything..." id="searchTextbox" />
+            <div class="input-group-append">
+                <input type="submit" class="btn btn-sm btn-info float-lg-right" value="Ask a Inkey Lister" id="ask-inkey" />
+            </div>
+        </div>
+
+
+
+    </div>
+    <div class="row" id="inkey-results-row">
+        <div class="col-12">
+            <div>
+                <table id="inkey-results-table" class="table-borderless" cellpadding="20" border="1">
+                    <tbody id="inkey-results"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row" id="inkey-button">
+        <a href="@Url.Action("InkeyAnswerForm", "Admin")" class="btn btn-primary">Inkey Question Form</a>
+    </div>
+</div>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+<script src="~/Scripts/FuzzSearch/lunr.js"></script>
+
+<script>
+
+    var documents = JSON.parse($('#InkeyJsonAnswers').val());
+
+    var idx = lunr(function () {
+        this.ref('InkeyAnswersId')
+        this.field('Answer')
+
+        documents.forEach(function (doc) {
+            this.add(doc)
+        }, this)
+
+
+    })
+
+    function DoSearch(srchValue) {
+        //var placeHolder = "+";
+        //srchValue.trim();
+        //console.log("srch val : " + srchValue);
+        //placeHolder += srchValue;
+        //var replaced = placeHolder.split(' ').join('~2 +');
+        //replaced += '~2';
+        //console.log(replaced);
+        var replaced = srchValue;
+        console.log(srchValue);
+        var xt = idx.search(replaced);
+        
+        $('#inkey-results').html("");
+        var line = "";
+        xt.forEach(function (dx) {
+            //console.log(dx.ref);
+            documents.forEach(function (docSearch) {
+                if (dx.ref == docSearch.InkeyAnswersId) {
+                    line += "<tr>";
+                    line += "<td>" + docSearch.Answer + "</td>";
+                    line += "<td><img src='" + docSearch.ProductImageLink + "' height='150' '/></td>";
+                    line += "</tr>";
+                    $('#inkey-results').fadeIn('slow').html(line);
+                }
+
+            });
+        });
+    };
+
+    //
+    $('#ask-inkey').click(function () {
+        $('#inkey-results').html("");
+        //DoSearch($('#searchTextbox').val());
+        DoSearch("exfoliator~1");
+    });
+
+    $('#searchTextbox').keydown(function (e) {
+        if (e.keyCode == 13) {
+            $('#inkey-results').html("");
+            DoSearch($('#searchTextbox').val());
+        }
+    })
+    //$('#searchTextbox').keyup(function () {
+
+    //});
+
+
+</script>
