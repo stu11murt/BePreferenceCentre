@@ -19,14 +19,12 @@
             </div>
         </div>
 
-
-
     </div>
-    <div class="row" id="inkey-results-row">
+    <div class="row fadeIn" id="inkey-results-row">
         <div class="col-12">
             <div>
                 <table id="inkey-results-table" class="table-borderless" cellpadding="20" border="1">
-                    <tbody id="inkey-results"></tbody>
+                    <tbody id="inkey-results" class="animated bounce"></tbody>
                 </table>
             </div>
         </div>
@@ -34,14 +32,36 @@
     <div class="row" id="inkey-button">
         <a href="@Url.Action("InkeyAnswerForm", "Admin")" class="btn btn-primary">Inkey Question Form</a>
     </div>
+    <div class="row" id="inkey-button">
+        <a href="@Url.Action("Download", "Admin")" class="btn btn-primary">Save File</a>
+    </div>
 </div>
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
 <script src="~/Scripts/FuzzSearch/lunr.js"></script>
+<script src="~/Scripts/Json/inkey.json" type="text/javascript"></script>
 
 <script>
+    var documents;
 
-    var documents = JSON.parse($('#InkeyJsonAnswers').val());
+    var jsonFile = readTextFile("/Scripts/Json/inkey.json");
+    var allText = "";
+    function readTextFile(file) {
+        var rawFile = new XMLHttpRequest();
+        rawFile.open("GET", file, false);
+        rawFile.onreadystatechange = function () {
+            if (rawFile.readyState === 4) {
+                if (rawFile.status === 200 || rawFile.status == 0) {
+                    allText = rawFile.responseText;
+                    console.log(allText);
+                    documents = JSON.parse(allText);
+                }
+            }
+        }
+        rawFile.send(null);
+    }
+
+
 
     var idx = lunr(function () {
         this.ref('InkeyAnswersId')
@@ -65,16 +85,15 @@
         var replaced = srchValue;
         console.log(srchValue);
         var xt = idx.search(replaced);
-        
+
         $('#inkey-results').html("");
         var line = "";
         xt.forEach(function (dx) {
             //console.log(dx.ref);
             documents.forEach(function (docSearch) {
                 if (dx.ref == docSearch.InkeyAnswersId) {
-                    line += "<tr>";
-                    line += "<td>" + docSearch.Answer + "</td>";
-                    line += "<td><img src='" + docSearch.ProductImageLink + "' height='150' '/></td>";
+                    line += "<tr class='animated bounceInUp'>";
+                    line += "<td><div class='ink-answer'>" + docSearch.Answer + "</div><div class='ink-ans-img'><img src='" + docSearch.ProductImageLink + "' height='150' '/></div></td>";
                     line += "</tr>";
                     $('#inkey-results').fadeIn('slow').html(line);
                 }
@@ -96,9 +115,8 @@
             DoSearch($('#searchTextbox').val());
         }
     })
-    //$('#searchTextbox').keyup(function () {
 
-    //});
+
 
 
 </script>

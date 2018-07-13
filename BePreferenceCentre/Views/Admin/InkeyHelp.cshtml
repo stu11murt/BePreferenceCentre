@@ -24,7 +24,7 @@
     <div class="row" id="inkey-results-row">
         <div class="col-12">
             <div>
-                <table id="inkey-results-table" class="table-borderless" cellpadding="20" border="1">
+                <table id="inkey-results-table" class="table-borderless" cellpadding="20">
                     <tbody id="inkey-results"></tbody>
                 </table>
             </div>
@@ -32,15 +32,36 @@
     </div>
     <div class="row" id="inkey-button">
         <a href="@Url.Action("InkeyAnswerForm", "Admin")" class="btn btn-primary">Inkey Question Form</a>
+        <a href="@Url.Action("Download", "Admin")" id="savFile" class="btn btn-danger">Save File</a>
     </div>
+
 </div>
 
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
 <script src="~/Scripts/FuzzSearch/fuse.js"></script>
 <script type="text/javascript">
 
-    var answers = JSON.parse($('#InkeyJsonAnswers').val());
-    console.log(answers);
+    var answers;
+
+    var jsonFile = readTextFile("/Scripts/Json/inkey.json");
+    var allText = "";
+    function readTextFile(file) {
+        var rawFile = new XMLHttpRequest();
+        rawFile.open("GET", file, false);
+        rawFile.onreadystatechange = function () {
+            if (rawFile.readyState === 4) {
+                if (rawFile.status === 200 || rawFile.status == 0) {
+                    allText = rawFile.responseText;
+                    console.log(allText);
+                    answers = JSON.parse(allText);
+                }
+            }
+        }
+        rawFile.send(null);
+    }
+
+
     var options = {
         shouldSort: true,
         tokenise: true,
@@ -63,9 +84,9 @@
             console.log("count : " + i);
             line += "<tr>";
             line += "<td>" + item.Answer + "</td>";
-            line += "<td><img src='"+ item.ProductImageLink +"' height='150' '/></td>";
+            line += "<td><img src='" + item.ProductImageLink + "' height='150' '/></td>";
             line += "</tr>";
-            $('#inkey-results').html(line);
+            $('#inkey-results').html(line).addClass('fadeIn');
             i++;
         });
     };
@@ -86,7 +107,7 @@
     $('#ask-inkey').click(function () {
         $('#inkey-results').html("");
         DoSearch($('#searchTextbox').val());
-        
+
     });
 
     $('#searchTextbox').keydown(function (e) {

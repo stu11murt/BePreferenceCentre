@@ -8,6 +8,7 @@ using BePreferenceCentre.Helpers;
 using BePreferenceCentre.DAL;
 using BePreferenceCentre.ViewModels;
 using BePreferenceCentre.ActionFilters;
+using System.Text;
 
 namespace BePreferenceCentre.Controllers
 {
@@ -101,6 +102,20 @@ namespace BePreferenceCentre.Controllers
 
                 throw ex;
             }
+        }
+
+        public FileResult Download()
+        {
+            InkeyViewModel inkViewMod = new InkeyViewModel();
+            byte[] fileBytes = Encoding.ASCII.GetBytes(inkViewMod.InkeyJsonAnswers);
+            string fileName = "inkey.json";
+            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+        }
+
+
+        public ActionResult Animated()
+        {
+            return View();
         }
 
     }

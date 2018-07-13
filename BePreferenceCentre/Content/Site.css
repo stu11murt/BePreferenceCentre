@@ -20,7 +20,7 @@
 input,
 select,
 textarea {
-    max-width: 280px;
+    max-width: 1024px;
 }
 
 .tick-cards {
@@ -75,9 +75,59 @@ textarea {
     width:100%;
 }
 
-.boxsizingBorder {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    max-width:100%!important;
+
+#savFile{
+    margin-left:130px;
+}
+
+.ink-answer {
+    width: 70%;
+    line-height: 34px;
+    float: left;
+}
+
+.ink-ans-img {
+    width: 22%;
+    float:right;
+    margin-right:3%;
+}
+
+#inkey-results-row {
+    margin-top: 50px;
+    font-size: 25px;
+}
+
+
+
+@media (max-width: 420px) {
+
+    .ink-answer {
+        width: 100%;
+        line-height: 34px;
+        float:left;
+    }
+
+    .ink-ans-img {
+        width: 80%;
+        margin-top:20px;
+    }
+
+    #inkey-results-row {
+        display:inline-block;
+        margin-top: 50px;
+        font-size: 20px;
+    }
+
+        #inkey-results-row table {
+            border-radius: 30px;
+        }
+
+        #inkey-results-row tr {
+            margin-bottom: 10px;
+        }
+
+
+        #inkey-results-row td {
+            border: 1px solid #C1C1C1;
+        }
 }
