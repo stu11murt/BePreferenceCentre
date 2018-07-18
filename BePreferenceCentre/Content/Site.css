@@ -97,10 +97,12 @@ textarea {
     font-size: 25px;
 }
 
-
+.inkey-instructions ul {
+    list-style:disc;
+    font-size:70%;
+ }
 
 @media (max-width: 420px) {
-
     .ink-answer {
         width: 100%;
         line-height: 34px;
@@ -108,8 +110,8 @@ textarea {
     }
 
     .ink-ans-img {
-        width: 80%;
-        margin-top:20px;
+        width: 64%;
+        margin-top:36px;
     }
 
     #inkey-results-row {
@@ -130,4 +132,9 @@ textarea {
         #inkey-results-row td {
             border: 1px solid #C1C1C1;
         }
+}
+
+.inkey-table-data {
+
+
 }

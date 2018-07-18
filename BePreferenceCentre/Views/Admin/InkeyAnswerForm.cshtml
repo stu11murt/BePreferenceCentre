@@ -26,6 +26,18 @@
                         </div>
                         <div class="panel-body">
                             <div class="form-group">
+                                @Html.LabelFor(m => m.answer.ProductName, new { @class = "col-sm-2 control-label" })
+                                <div class="col-sm-6">
+                                    @Html.TextBoxFor(m => m.answer.ProductName, new { @class = "form-control boxsizingBorder" })
+
+                                </div>
+                            </div>
+                            <div class="col-sm-offset-2">
+                                @Html.ValidationMessageFor(m => m.answer.ProductName, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group">
                                 @Html.LabelFor(m => m.answer.Question, new { @class = "col-sm-2 control-label" })
                                 <div class="col-sm-12">
                                     @Html.TextAreaFor(m => m.answer.Question, new { @class = "form-control boxsizingBorder" })
@@ -72,19 +84,29 @@
                             </div>
                             <div class="hr-line-dashed"></div>
 
-                        </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.answer.InstructionsForUse, new { @class = "col-sm-2 control-label" })
+                                <div class="col-sm-12">
+                                  @Html.TextAreaFor(m => m.answer.InstructionsForUse)
+                                </div>
+                            </div>
+                         </div>
                     </div>
                 </div>
             </div>
 
 
 
-            <div class="row col-lg-12">
-                <table class="table-striped" cellpadding="10">
+            <div class="row col-lg-12" id="inkey-table-data">
+                <table cellpadding="20" cellspacing="20" class="table-responsive table-striped" id="inkey-answers">
                     <thead>
                         <tr>
+                            <th>Product Name</th>
+                            <th>Question</th>
                             <th>Answer</th>
+                            @*<th>Product Image Link</th>
                             <th>Product Link</th>
+                            <th>Instructions For Use</th>*@
                         </tr>
                     </thead>
                     <tbody>
@@ -120,6 +142,17 @@
         $('#answer_Answer').val("");
         $('#answer_ProductImageLink').val("");
         $('#answer_ProductLink').val("");
+
+
+        //var table = $('#inkey-answers').DataTable({
+        //    responsive: true
+        //});
+
+        //new $.fn.dataTable.FixedHeader(table);
+
+        $('#answer_InstructionsForUse').summernote();
+
+       
     });
 
 </script>

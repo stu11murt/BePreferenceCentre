@@ -41,6 +41,8 @@
           <Property Name="Answer" Type="nvarchar(max)" Nullable="false" />
           <Property Name="ProductLink" Type="nvarchar" MaxLength="512" Nullable="false" />
           <Property Name="ProductImageLink" Type="nvarchar" MaxLength="512" Nullable="false" />
+          <Property Name="ProductName" Type="nvarchar" MaxLength="255" />
+          <Property Name="InstructionsForUse" Type="nvarchar(max)" />
         </EntityType>
         <EntityContainer Name="BePreferencesModelStoreContainer">
           <EntitySet Name="BEMailingLists" EntityType="Self.BEMailingLists" Schema="dbo" store:Type="Tables" />
@@ -92,6 +94,8 @@
           <Property Name="Answer" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ProductLink" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
           <Property Name="ProductImageLink" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="ProductName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="InstructionsForUse" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -131,6 +135,8 @@
           <EntitySetMapping Name="InkeyAnswers">
             <EntityTypeMapping TypeName="BePreferencesModel.InkeyAnswer">
               <MappingFragment StoreEntitySet="InkeyAnswers">
+                <ScalarProperty Name="InstructionsForUse" ColumnName="InstructionsForUse" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
                 <ScalarProperty Name="ProductImageLink" ColumnName="ProductImageLink" />
                 <ScalarProperty Name="ProductLink" ColumnName="ProductLink" />
                 <ScalarProperty Name="Answer" ColumnName="Answer" />

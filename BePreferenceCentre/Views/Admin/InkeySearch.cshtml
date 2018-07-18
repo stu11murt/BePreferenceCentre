@@ -42,24 +42,24 @@
 <script src="~/Scripts/Json/inkey.json" type="text/javascript"></script>
 
 <script>
-    var documents;
+    var documents = JSON.parse($('#InkeyJsonAnswers').val());
 
-    var jsonFile = readTextFile("/Scripts/Json/inkey.json");
-    var allText = "";
-    function readTextFile(file) {
-        var rawFile = new XMLHttpRequest();
-        rawFile.open("GET", file, false);
-        rawFile.onreadystatechange = function () {
-            if (rawFile.readyState === 4) {
-                if (rawFile.status === 200 || rawFile.status == 0) {
-                    allText = rawFile.responseText;
-                    console.log(allText);
-                    documents = JSON.parse(allText);
-                }
-            }
-        }
-        rawFile.send(null);
-    }
+    //var jsonFile = readTextFile("/Scripts/Json/inkey.json");
+    //var allText = "";
+    //function readTextFile(file) {
+    //    var rawFile = new XMLHttpRequest();
+    //    rawFile.open("GET", file, false);
+    //    rawFile.onreadystatechange = function () {
+    //        if (rawFile.readyState === 4) {
+    //            if (rawFile.status === 200 || rawFile.status == 0) {
+    //                allText = rawFile.responseText;
+    //                console.log(allText);
+    //                documents = JSON.parse(allText);
+    //            }
+    //        }
+    //    }
+    //    rawFile.send(null);
+    //}
 
 
 
@@ -88,14 +88,20 @@
 
         $('#inkey-results').html("");
         var line = "";
+        var i = 0;
         xt.forEach(function (dx) {
             //console.log(dx.ref);
             documents.forEach(function (docSearch) {
                 if (dx.ref == docSearch.InkeyAnswersId) {
-                    line += "<tr class='animated bounceInUp'>";
-                    line += "<td><div class='ink-answer'>" + docSearch.Answer + "</div><div class='ink-ans-img'><img src='" + docSearch.ProductImageLink + "' height='150' '/></div></td>";
+                    if (i > 0)
+                        return false;
+                    line += "<tr><td><h1>" + docSearch.ProductName + "</h1></td></tr>";
+                    line += "<tr>";
+                    line += "<td class='animated bounceInUp'><div class='ink-answer'>" + docSearch.Answer + "</div><div class='ink-ans-img'><img src='" + docSearch.ProductImageLink + "' height='150' '/></div></td>";
                     line += "</tr>";
+                    line += docSearch.InstructionsForUse
                     $('#inkey-results').fadeIn('slow').html(line);
+                    i++;
                 }
 
             });

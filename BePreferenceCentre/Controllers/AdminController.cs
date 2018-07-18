@@ -84,6 +84,7 @@ namespace BePreferenceCentre.Controllers
         }
 
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult InkeyAnswerForm(InkeyViewModel inkMod)
         {
             try
@@ -91,8 +92,8 @@ namespace BePreferenceCentre.Controllers
                 InkeyAnswer newAns = inkMod.answer;
                 using(var db = new BePreferencesEntities())
                 {
-                    db.InkeyAnswers.Add(newAns);
-                    db.SaveChanges();
+                    //db.InkeyAnswers.Add(newAns);
+                    //db.SaveChanges();
 
                     return View(new InkeyViewModel());
                 }

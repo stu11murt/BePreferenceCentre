@@ -19,5 +19,7 @@ namespace BePreferenceCentre.DAL
         public string Answer { get; set; }
         public string ProductLink { get; set; }
         public string ProductImageLink { get; set; }
+        public string ProductName { get; set; }
+        public string InstructionsForUse { get; set; }
     }
 }
