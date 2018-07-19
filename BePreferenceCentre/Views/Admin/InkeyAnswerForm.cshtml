@@ -9,20 +9,19 @@
    
 </div>
 
-<div class="container">
+<div class="container-questions">
     <div class="content animate-panel">
         @using (Html.BeginForm("InkeyAnswerForm", "Admin", null, FormMethod.Post, new { @class = "form-horizontal" }))
         {
 
             <div class="row">
-                <div class="col-lg-12 col-md-8 col-sm-12">
+                <div class="col-lg-6 col-md-8 col-sm-12">
                     <div class="hpanel">
                         <div class="panel-heading">
                             <div class="panel-tools">
                                 <a class="showhide"><i class="fa fa-chevron-up"></i></a>
-
                             </div>
-                          
+
                         </div>
                         <div class="panel-body">
                             <div class="form-group">
@@ -87,49 +86,47 @@
                             <div class="form-group">
                                 @Html.LabelFor(m => m.answer.InstructionsForUse, new { @class = "col-sm-2 control-label" })
                                 <div class="col-sm-12">
-                                  @Html.TextAreaFor(m => m.answer.InstructionsForUse)
+                                    @Html.TextAreaFor(m => m.answer.InstructionsForUse)
                                 </div>
                             </div>
-                         </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <input type="submit" class="btn btn-lg btn-primary" value="Submit Booking" id="subbtn" />
+                                </div>
+                                <div class="col-lg-6">
+                                    <a href="@Url.Action("InkeyHelp", "Admin")" class="btn btn-lg btn-info float-right" id="inkeyHelper">Inkey Helper</a>
+                                </div>
+                            </div>
+
+
+                        </div>
                     </div>
                 </div>
-            </div>
 
-
-
-            <div class="row col-lg-12" id="inkey-table-data">
-                <table cellpadding="20" cellspacing="20" class="table-responsive table-striped" id="inkey-answers">
-                    <thead>
-                        <tr>
-                            <th>Product Name</th>
-                            <th>Question</th>
-                            <th>Answer</th>
-                            @*<th>Product Image Link</th>
-                            <th>Product Link</th>
-                            <th>Instructions For Use</th>*@
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (InkeyAnswer answer in Model.InkeyAnswers)
-                        {
-                            Html.RenderPartial("Partials/_inkeyAnswers", answer);
-                        }
-                    </tbody>
-                </table>
-
-            </div>
-
-
-            <div class="row col-lg-12 ink-buttons">
-
-                <div class="col-lg-6">
-                        <input type="submit" class="btn btn-lg btn-primary" value="Submit Booking" id="subbtn" />
+                <div class="col-lg-6 col-md-8 col-sm-12">
+                    <table cellpadding="20" cellspacing="20" class="table-responsive table-striped" id="inkey-answers">
+                        <thead>
+                            <tr>
+                                <th>Product Name</th>
+                                <th>Question</th>
+                                <th>Answer</th>
+                                @*<th>Product Image Link</th>
+                                    <th>Product Link</th>
+                                    <th>Instructions For Use</th>*@
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (InkeyAnswer answer in Model.InkeyAnswers)
+                            {
+                                Html.RenderPartial("Partials/_inkeyAnswers", answer);
+                            }
+                        </tbody>
+                    </table>
                 </div>
-                <div class="col-lg-6">
-                    <a href="@Url.Action("InkeyHelp", "Admin")" class="btn btn-lg btn-info float-right" id="inkeyHelper">Inkey Helper</a>
-                </div>
-
             </div>
+
 
         }
     </div>
@@ -138,6 +135,8 @@
 <script>
 
     $(document).ready(function () {
+        $('#answer_InstructionsForUse').summernote();
+
         $('#answer_Question').val("");
         $('#answer_Answer').val("");
         $('#answer_ProductImageLink').val("");
@@ -150,7 +149,7 @@
 
         //new $.fn.dataTable.FixedHeader(table);
 
-        $('#answer_InstructionsForUse').summernote();
+        
 
        
     });
