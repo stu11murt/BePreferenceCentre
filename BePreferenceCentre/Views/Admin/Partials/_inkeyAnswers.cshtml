@@ -3,8 +3,10 @@
     <td>@Model.ProductName</td>
     <td>@Model.Question</td>
     <td>@Model.Answer</td>
+    <td><a href="@Url.Action("EditQuestion", "Admin", new { id = Model.InkeyAnswersId })" class="btn btn-primary">Edit Question</a></td>
+    <td><a href="@Url.Action("DeleteQuestion", "Admin", new { id = Model.InkeyAnswersId })" class="btn btn-danger">Remove Question</a></td>
     @*<td>@Model.ProductImageLink</td>
-    <td>@Model.ProductLink</td>
-    <td>@Model.InstructionsForUse</td>*@
+        <td>@Model.ProductLink</td>
+        <td>@Model.InstructionsForUse</td>*@
 </tr>
 

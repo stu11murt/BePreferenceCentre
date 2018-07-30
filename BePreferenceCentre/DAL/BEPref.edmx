@@ -44,10 +44,19 @@
           <Property Name="ProductName" Type="nvarchar" MaxLength="255" />
           <Property Name="InstructionsForUse" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="InkeyProducts">
+          <Key>
+            <PropertyRef Name="InkeyProductsId" />
+          </Key>
+          <Property Name="InkeyProductsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="ProductImageLink" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
         <EntityContainer Name="BePreferencesModelStoreContainer">
           <EntitySet Name="BEMailingLists" EntityType="Self.BEMailingLists" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BEMemberList" EntityType="Self.BEMemberList" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InkeyAnswers" EntityType="Self.InkeyAnswers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InkeyProducts" EntityType="Self.InkeyProducts" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -57,6 +66,7 @@
           <EntitySet Name="BEMailingLists" EntityType="BePreferencesModel.BEMailingList" />
           <EntitySet Name="BEMemberLists" EntityType="BePreferencesModel.BEMemberList" />
           <EntitySet Name="InkeyAnswers" EntityType="BePreferencesModel.InkeyAnswer" />
+          <EntitySet Name="InkeyProducts" EntityType="BePreferencesModel.InkeyProduct" />
         </EntityContainer>
         <EntityType Name="BEMailingList">
           <Key>
@@ -96,6 +106,14 @@
           <Property Name="ProductImageLink" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
           <Property Name="ProductName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="InstructionsForUse" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="InkeyProduct">
+          <Key>
+            <PropertyRef Name="InkeyProductsId" />
+          </Key>
+          <Property Name="InkeyProductsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ProductImageLink" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -142,6 +160,15 @@
                 <ScalarProperty Name="Answer" ColumnName="Answer" />
                 <ScalarProperty Name="Question" ColumnName="Question" />
                 <ScalarProperty Name="InkeyAnswersId" ColumnName="InkeyAnswersId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InkeyProducts">
+            <EntityTypeMapping TypeName="BePreferencesModel.InkeyProduct">
+              <MappingFragment StoreEntitySet="InkeyProducts">
+                <ScalarProperty Name="ProductImageLink" ColumnName="ProductImageLink" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="InkeyProductsId" ColumnName="InkeyProductsId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

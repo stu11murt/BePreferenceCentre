@@ -119,5 +119,66 @@ namespace BePreferenceCentre.Controllers
             return View();
         }
 
+        public ActionResult SummerNote()
+        {
+            InkeyAnswer inkAns = new InkeyAnswer();
+            return View(inkAns);
+        }
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult SummerNote(InkeyAnswer inkAns)
+        {
+            return View(inkAns);
+        }
+
+        public ActionResult ProductManager()
+        {
+            ProductManagerViewModel prodManViewMod = new ProductManagerViewModel();
+            return View(prodManViewMod);
+        }
+
+        [HttpPost]
+        public ActionResult AddNewProduct(ProductManagerViewModel newProdMod)
+        {
+            try
+            {
+                using(var db = new BePreferencesEntities())
+                {
+                    InkeyProduct newProd = newProdMod.NewProduct;
+
+                    db.InkeyProducts.Add(newProd);
+                    db.SaveChanges();
+
+                    return RedirectToAction("ProductManager");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public ActionResult RemoveProduct(int prodId)
+        {
+            try
+            {
+                using (var db = new BePreferencesEntities())
+                {
+                    InkeyProduct newProd = db.InkeyProducts.FirstOrDefault(p => p.InkeyProductsId == prodId);
+
+                    db.InkeyProducts.Remove(newProd);
+                    db.SaveChanges();
+
+                    return RedirectToAction("ProductManager");
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

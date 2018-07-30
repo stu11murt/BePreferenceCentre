@@ -8,6 +8,7 @@
         <EntityTypeShape EntityType="BePreferencesModel.BEMailingList" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="BePreferencesModel.BEMemberList" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="BePreferencesModel.InkeyAnswer" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="BePreferencesModel.InkeyProduct" Width="1.5" PointX="2.75" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

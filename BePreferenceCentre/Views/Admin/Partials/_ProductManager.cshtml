@@ -1,0 +1,32 @@
+﻿@model IEnumerable<BePreferenceCentre.DAL.InkeyProduct>
+@using BePreferenceCentre.DAL
+<div class="card">
+    <div class="card-header">
+        Edit/Remove Products
+    </div>
+    <div class="card-body">
+        <table cellpadding="20" cellspacing="20" class="table-responsive table-striped" id="inkey-answers">
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Product Image Link</th>
+                    <th>Edit</th>
+                    <th>Remove</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (InkeyProduct product in Model)
+                {
+                    <tr>
+                        <td>@product.ProductName</td>
+                        <td>@product.ProductImageLink</td>
+                        <td><a href="@Url.Action("EditProduct", "Admin", new { id = product.InkeyProductsId })" class="btn-sm btn-info">Edit</a></td>
+                        <td><a href="@Url.Action("RemoveProduct", "Admin", new { prodId = product.InkeyProductsId })" class="btn-sm btn-danger">Remove</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        
+        <a href="@Url.Action("InkeyAnswerForm", "Admin")" class="btn btn-primary">Back to Inkey Questionnaire</a>
+    </div>
+</div>

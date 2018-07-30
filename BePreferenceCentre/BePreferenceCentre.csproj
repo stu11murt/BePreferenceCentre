@@ -183,9 +183,13 @@
     <Compile Include="DAL\InkeyAnswer.cs">
       <DependentUpon>BEPref.tt</DependentUpon>
     </Compile>
+    <Compile Include="DAL\InkeyProduct.cs">
+      <DependentUpon>BEPref.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\DropDownLists.cs" />
     <Compile Include="Helpers\EncryptionHelper.cs" />
     <Compile Include="Helpers\SimpleEmailSender.cs" />
     <Compile Include="Helpers\UtilHelpers.cs" />
@@ -195,6 +199,7 @@
     <Compile Include="ViewModels\InkeyViewModel.cs" />
     <Compile Include="ViewModels\MailingListOptionsViewModel.cs" />
     <Compile Include="ViewModels\MailingListsViewModel.cs" />
+    <Compile Include="ViewModels\ProductManagerViewModel.cs" />
     <Compile Include="ViewModels\UserSubscribedtoListViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -543,6 +548,7 @@
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\FuzzSearch\fuse.js" />
     <Content Include="Scripts\FuzzSearch\lunr.js" />
+    <Content Include="Scripts\inkeySearch.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -622,7 +628,9 @@
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Testing\ulList.html" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -658,6 +666,9 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Admin\SummerNote.cshtml" />
+    <Content Include="Views\Admin\ProductManager.cshtml" />
+    <Content Include="Views\Admin\Partials\_ProductManager.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
