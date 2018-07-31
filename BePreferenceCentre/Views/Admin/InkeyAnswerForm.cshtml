@@ -1,5 +1,5 @@
 ﻿@model BePreferenceCentre.ViewModels.InkeyViewModel
-    @using BePreferenceCentre.Helpers
+@using BePreferenceCentre.Helpers
 @using BePreferenceCentre.DAL;
 @{
     ViewBag.Title = "InkeyAnswerForm";
@@ -14,6 +14,25 @@
     <div class="content animate-panel">
         @using (Html.BeginForm("InkeyAnswerForm", "Admin", null, FormMethod.Post, new { @class = "form-horizontal" }))
         {
+            <div class="row" id="buttons">
+                <div class="col-lg-3">
+                    <input type="submit" class="btn btn-primary" value="Submit Booking" id="subbtn" />
+                </div>
+                <div class="col-lg-3">
+                    <a href="@Url.Action("InkeyHelp", "Admin")" class="btn btn-info float-right" id="inkeyHelper">Inkey Helper</a>
+                </div>
+                <div class="col-lg-3">
+                    <a href="@Url.Action("ProductManager", "Admin")" class="btn  btn-secondary float-right" id="inkeyHelper">Product Manager</a>
+                </div>
+
+                <div class="col-lg-3 showAnswersBtn">
+                    <a href="#" onclick="ShowAnswers()" class="btn  btn-warning float-right" id="inkeyHelper">Show Answers</a>
+                </div>
+                <div class="col-lg-3 showFormBtn">
+                    <a href="#" onclick="ShowForm()" class="btn  btn-success float-right" id="inkeyHelper">Show Form</a>
+                </div>
+            </div>
+
 
             <div class="row" id="inkeyform">
                 <div class="col-lg-12 col-md-12 col-sm-12">
@@ -87,7 +106,8 @@
                             <div class="form-group">
                                 @Html.LabelFor(m => m.answer.InstructionsForUse, new { @class = "col-sm-2 control-label" })
                                 <div class="col-sm-12">
-                                    <textarea name="answer.InstructionsForUse" id="InstructionsForUse"></textarea>
+                                    @*<textarea name="answer.InstructionsForUse" id="InstructionsForUse"></textarea>*@
+                                    @Html.TextAreaFor(m => m.answer.InstructionsForUse, new { @class = "col-sm-2 control-label" })
                                 </div>
                             </div>
                             <div class="hr-line-dashed"></div>
@@ -119,81 +139,97 @@
                 </div>
             </div>
 
-           
+
             <div class="row">
-                <div class="col-lg-3">
-                    <input type="submit" class="btn btn-primary" value="Submit Booking" id="subbtn" />
+                <div class="col-lg-3 subButt">
+                    <input type="submit" class="btn btn-primary float-left" value="Submit Booking" id="subbtn" />
                 </div>
                 <div class="col-lg-3">
-                    <a href="@Url.Action("InkeyHelp", "Admin")" class="btn btn-info float-right" id="inkeyHelper">Inkey Helper</a>
+                    <a href="@Url.Action("InkeyHelp", "Admin")" class="btn btn-info float-left" id="inkeyHelper">Inkey Helper</a>
                 </div>
                 <div class="col-lg-3">
-                    <a href="@Url.Action("ProductManager", "Admin")" class="btn  btn-secondary float-right" id="inkeyHelper">Product Manager</a>
+                    <a href="@Url.Action("ProductManager", "Admin")" class="btn  btn-secondary float-left" id="inkeyHelper">Product Manager</a>
                 </div>
 
-                <div class="col-lg-3" id="showAnswersBtn">
-                    <a href="#" onclick="ShowAnswers()" class="btn  btn-warning float-right" id="inkeyHelper">Show Answers</a>
+                <div class="col-lg-3 showAnswersBtn">
+                    <a href="#" onclick="ShowAnswers()" class="btn  btn-warning float-left" id="inkeyHelper">Show Answers</a>
                 </div>
-                <div class="col-lg-3" id="showFormBtn">
-                    <a href="#" onclick="ShowForm()" class="btn  btn-success float-right" id="inkeyHelper">Show Form</a>
+                <div class="col-lg-3 showFormBtn">
+                    <a href="#" onclick="ShowForm()" class="btn  btn-success float-left" id="inkeyHelper">Show Form</a>
                 </div>
             </div>
-            
+
 
 
         }
     </div>
 </div>
 
-<!-- include libraries(jQuery, bootstrap) -->
-<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-@*<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">*@
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-@*<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>*@
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/tooltip.js/dist/umd/tooltip.min.js"></script>
-
-
-<!-- include summernote css/js -->
-@*<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">*@
-<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.10/summernote-bs4.css" rel="stylesheet">
-@*<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>*@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.10/summernote-bs4.js"></script>
-<script>
-
-    $(document).ready(function () {
-        $('#InstructionsForUse').summernote();
-
-        $('#answer_Question').val("");
-        $('#answer_Answer').val("");
-        $('#answer_ProductImageLink').val("");
-        $('#answer_ProductLink').val("");
-
+@section Scripts {
+    @*<script src="~/Scripts/jquery-3.3.1.js"></script>
+        <script src="~/Scripts/bootstrap.min.js"></script>
+        <script src="~/Scripts/popper.js"></script>
+        <script src="~/Scripts/summernote/summernote.min.js"></script>
+        <script src="~/Scripts/summernote/summernote-bs4.js"></script>*@
+    <link href="~/Scripts/summernote/summernote-bs4.css" rel="stylesheet" />
+    @Scripts.Render("~/bundles/inkey")
+    @Scripts.Render("~/bundles/jquery")
+    <script>
         ShowForm();
-        //var table = $('#inkey-answers').DataTable({
-        //    responsive: true
-        //});
 
-        //new $.fn.dataTable.FixedHeader(table);
+        $(document).ready(function () {
+            $('#answer_InstructionsForUse').summernote();
 
-    });
+            $('#answer_Question').val("");
+            $('#answer_Answer').val("");
+            $('#answer_ProductImageLink').val("");
+            $('#answer_ProductLink').val("");
 
-    function ShowForm() {
-        $('#answers').hide();
-        $('#showFormBtn').hide();
-        $('#showAnswersBtn').show();
-        $('#inkeyform').show();
-    }
+           
 
-    function ShowAnswers() {
-        $('#answers').show();
-        $('#showFormBtn').show();
-        $('#showAnswersBtn').hide();
-        $('#inkeyform').hide();
-    }
 
-</script>
+        });
 
+
+        $('#answer_ProductName').on('change', function () {
+            console.log("ID : " + $("#answer_ProductName").val());
+            $.ajax({
+                url: "../Admin/GetProductLink?id=" + $("#answer_ProductName").val(),
+                type: "GET",
+            })
+                .done(function (result) {
+                    $('#answer_ProductImageLink').val(result);
+                });
+
+            return false;
+        });
+
+        function ShowForm() {
+            $('#answers').hide();
+            $('.showFormBtn').hide();
+            $('.showAnswersBtn').show();
+            $('#inkeyform').show();
+            $('.subButt').show();
+
+            var table = $('#inkey-answers').DataTable();
+            table.destroy();
+        }
+
+        function ShowAnswers() {
+            $('#answers').show();
+            $('.showFormBtn').show();
+            $('.showAnswersBtn').hide();
+            $('#inkeyform').hide();
+            $('.subButt').hide();
+
+            var table = $('#inkey-answers').DataTable({
+                responsive: true
+            });
+
+            new $.fn.dataTable.FixedHeader(table);
+
+        }
+
+    </script>
+
+}

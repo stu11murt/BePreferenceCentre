@@ -11,7 +11,7 @@ namespace BePreferenceCentre.Helpers
         public static List<SelectListItem> GetDropDownListForInkeyProducts()
         {
             BePreferencesEntities db = new BePreferencesEntities();
-            return db.InkeyProducts.Select(r => new SelectListItem { Text = r.ProductName, Value = r.ProductName }).ToList();
+            return db.InkeyProducts.Select(r => new SelectListItem { Text = r.ProductName, Value = r.InkeyProductsId.ToString() }).ToList();
         }
     }
 }

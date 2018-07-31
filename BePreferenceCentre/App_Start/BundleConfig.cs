@@ -9,14 +9,14 @@ namespace BePreferenceCentre
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                         "~/Scripts/jquery-{version}.js",
-                          "~/Scripts/popper.js",
-                         "~/Scripts/summernote/summernote.min.js",
-                         "~/Scripts/DataTables/jquery.dataTables.min.js",
-                         "~/Scripts/DataTables/dataTables.bootstrap.min.js",
-                         "~/Scripts/DataTables/dataTables.fixedHeader.min.js",
-                         "~/Scripts/DataTables/dataTables.responsive.min.js",
-                         "~/Scripts/DataTables/responsive.bootstrap.min.js"));
+                         "~/Scripts/jquery-3.3.1.js",
+                         "~/Scripts/jquery.unobtrusive-ajax.js",
+                         "~/Scripts/summernote/summernote-bs4.js",
+                         "~/Scripts/DataTables/jquery.dataTables.js",
+                         "~/Scripts/DataTables/dataTables.bootstrap.js",
+                         "~/Scripts/DataTables/dataTables.fixedHeader.js",
+                         "~/Scripts/DataTables/dataTables.responsive.js",
+                         "~/Scripts/DataTables/responsive.bootstrap.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -36,10 +36,18 @@ namespace BePreferenceCentre
                       "~/Content/animate.css"));
 
             bundles.Add(new StyleBundle("~/Content/thirds").Include(
-                      "~/Scripts/summernote/summernote.css",
-                      "~/Content/DataTables/css/jquery.dataTables.min.css",
-                      "~/Content/DataTables/css/dataTables.fixedHeader.min.css",
-                      "~/Content/DataTables/css/responsive.bootstrap.min.css"));
+                        "~/Script/summernote/summernote-bs4.css",
+                      "~/Content/DataTables/css/jquery.dataTables.css",
+                      "~/Content/DataTables/css/dataTables.fixedHeader.css",
+                      "~/Content/DataTables/css/responsive.bootstrap.css"));
+
+
+            bundles.Add(new ScriptBundle("~/bundles/inkey").Include(
+                            "~/Scripts/jquery-3.3.1.js",
+                            "~/Scripts/bootstrap.min.js",
+                            "~/Scripts/popper.js",
+                            "~/Scripts/summernote/summernote.min.js",
+                            "~/Scripts/summernote/summernote-bs4.js"));
         }
     }
 }

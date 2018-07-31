@@ -14,7 +14,7 @@ namespace BePreferenceCentre.ViewModels
         public ProductManagerViewModel()
         {
             AllProducts = db.InkeyProducts.ToList();
-            //NewProduct = new InkeyProduct();
+            NewProduct = new InkeyProduct();
         }
 
         public InkeyProduct NewProduct { get; set; }

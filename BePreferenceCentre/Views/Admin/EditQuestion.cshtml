@@ -1,0 +1,122 @@
+﻿@model BePreferenceCentre.DAL.InkeyAnswer
+@using BePreferenceCentre.Helpers
+@{
+    ViewBag.Title = "EditQuestion";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="jumbotron" id="inkey-jumbo">
+
+</div>
+
+<div class="container-questions">
+    <div class="content animate-panel">
+        @using (Html.BeginForm("EditQuestion", "Admin", null, FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            @Html.HiddenFor(m => m.InkeyAnswersId)
+            <div class="row" id="inkeyform">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="hpanel">
+                        <div class="panel-heading">
+                            <div class="panel-tools">
+                                <a class="showhide"><i class="fa fa-chevron-up"></i></a>
+                            </div>
+
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.ProductName, new { @class = "col-sm-2 control-label" })
+                                <div class="col-sm-6">
+                                    @*@Html.TextBoxFor(m => m.answer.ProductName, new { @class = "form-control boxsizingBorder" })*@
+                                    @Html.DropDownListFor(m => m.ProductName, DropDownLists.GetDropDownListForInkeyProducts(), "- Select Product Name -", new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-sm-offset-2">
+                                @Html.ValidationMessageFor(m => m.ProductName, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Question, new { @class = "col-sm-2 control-label" })
+                                <div class="col-sm-12">
+                                    @Html.TextAreaFor(m => m.Question, new { @class = "form-control boxsizingBorder" })
+
+                                </div>
+                            </div>
+                            <div class="col-sm-offset-2">
+                                @Html.ValidationMessageFor(m => m.Question, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Answer, new { @class = "col-sm-2 control-label" })
+                                <div class="col-sm-12">
+                                    @Html.TextAreaFor(m => m.Answer, new { @class = "form-control boxsizingBorder" })
+
+                                </div>
+                            </div>
+                            <div class="col-sm-offset-2">
+                                @Html.ValidationMessageFor(m => m.Answer, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.ProductImageLink, new { @class = "col-sm-2 control-label" })
+                                <div class="col-sm-6">
+                                    @Html.TextBoxFor(m => m.ProductImageLink, new { @class = "form-control boxsizingBorder" })
+
+                                </div>
+                            </div>
+                            <div class="col-sm-offset-2">
+                                @Html.ValidationMessageFor(m => m.ProductImageLink, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.ProductLink, new { @class = "col-sm-2 control-label" })
+                                <div class="col-sm-6">
+                                    @Html.TextBoxFor(m => m.ProductLink, new { @class = "form-control boxsizingBorder" })
+
+                                </div>
+                            </div>
+                            <div class="col-sm-offset-2">
+                                @Html.ValidationMessageFor(m => m.ProductLink, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.InstructionsForUse, new { @class = "col-sm-2 control-label" })
+                                <div class="col-sm-12">
+                                    @*<textarea name="answer.InstructionsForUse" id="InstructionsForUse"></textarea>*@
+                                    @Html.TextAreaFor(m => m.InstructionsForUse, new { @class = "col-sm-2 control-label" })
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <input type="submit" class="btn btn-primary" value="Update Booking" id="subbtn" />
+                </div>
+                <div class="col-lg-3">
+                    <a href="@Url.Action("InkeyAnswerForm", "Admin")" class="btn btn-info float-right" id="inkeyHelper">Back</a>
+                </div>
+
+            </div>
+
+        }
+    </div>
+</div>
+
+<link href="~/Scripts/summernote/summernote-bs4.css" rel="stylesheet" />
+@Scripts.Render("~/bundles/inkey")
+@Scripts.Render("~/bundles/jquery")
+
+<script>
+    $(document).ready(function () {
+        $('#InstructionsForUse').summernote();
+    });
+</script>
