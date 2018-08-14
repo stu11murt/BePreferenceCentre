@@ -1,5 +1,5 @@
-﻿var answers = JSON.parse($('#InkeyJsonAnswers').val());
-
+﻿//var answers = JSON.parse($('#InkeyJsonAnswers').val());
+var answers = JSON.parse(GetAnswers());
 //var jsonFile = readTextFile("/Scripts/Json/inkey.json");
 //var allText = "";
 //function readTextFile(file) {
@@ -38,16 +38,49 @@ function DoSearch(srchValue) {
         if (i > 0)
             return false;
         console.log("count : " + i);
-        line += "<tr><td><h1>" + item.ProductName + "</h1></td></tr>";
+        line += "<tr><td></td></tr>";
         line += "<tr>";
-        line += "<td>" + item.Answer + "</td>";
-        line += "<td><img src='" + GetProductImage(item.ProductName) + "' height='200' '/></td>";
+        line += "<td><img src='http://www.deepbluedevelopment.co.uk/images/ClientImages/inkey/INKEY_LacticAcid.jpg' height='300' '/></td>";
+        line += "<td class='inkey-result'><h1>" + item.ProductName + "<br /><span class='inkey-phonetic'>/\ lak tic /\ a-sed</span></h1><br />" + item.Answer + "</td>";
+        line += "<td style='height: 290px; width: 1px; border-right: 1px dotted black;'></td><td class='inkey-related'><span><strong>RELATED ARTICLES</strong></span><br /><br /><strong><i>Using lactic acid?</i></strong><br /><hr><br /><strong><i>My daily routine?</i></strong><hr><br /><strong><i>What is lactic acid made from?</i></strong><hr><br /><strong><i>When should i use Lactic Acid?</i></strong><hr></td>";
         line += "</tr>";
-        line += item.InstructionsForUse
+        //line += "<tr><td>" + item.InstructionsForUse + "</td></tr>";
         $('#inkey-results').html(line).addClass('fadeIn');
         i++;
     });
+
+    if (i == 0) {
+        var InkeyQuestion = {
+            UserQuestion: $('#searchTextbox').val()
+        };
+        console.log("Whoops no answer");
+        $.ajax({
+            url: '../api/InkeyUserQuestions',
+            data: InkeyQuestion,
+            type: "POST",
+        })
+            .done(function (result) {
+                console.log(result.UserQuestion);
+                $('#inkey-results').html('<div><p>Hi, we are really sorry but we have not got an answer to this question at the moment, however your question has been logged and we will answer it a.s.a.p</p></div>').addClass('fadeIn');
+            });
+
+        return false;
+    }
 };
+
+
+function GetAnswers() {
+    $.ajax({
+        url: '../api/InkeyUserQuestions',
+        type: "GET",
+    })
+        .done(function (result) {
+            console.log("lookeme ma : " + result);
+            //$('#inkey-results').html('<div><p>Hi, we are really sorry but we have not got an answer to this question at the moment, however your question has been logged and we will answer it a.s.a.p</p></div>').addClass('fadeIn');
+        });
+
+    return false;
+}
 
 //$('#searchTextbox').keyup(function () {
 //    $('#inkey-results').html("");

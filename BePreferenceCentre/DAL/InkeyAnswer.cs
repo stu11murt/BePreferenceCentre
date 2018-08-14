@@ -21,5 +21,8 @@ namespace BePreferenceCentre.DAL
         public string ProductImageLink { get; set; }
         public string ProductName { get; set; }
         public string InstructionsForUse { get; set; }
+        public string Segmentation { get; set; }
+        public Nullable<int> ProductId { get; set; }
+        public string Concern { get; set; }
     }
 }

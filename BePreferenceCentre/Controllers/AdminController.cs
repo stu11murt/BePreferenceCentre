@@ -9,6 +9,8 @@ using BePreferenceCentre.DAL;
 using BePreferenceCentre.ViewModels;
 using BePreferenceCentre.ActionFilters;
 using System.Text;
+using System.IO;
+using OfficeOpenXml;
 
 namespace BePreferenceCentre.Controllers
 {
@@ -164,10 +166,11 @@ namespace BePreferenceCentre.Controllers
         }
 
 
-        public ActionResult GetProductLink(int id)
+        public ActionResult GetProductLinks(int id)
         {
             BePreferencesEntities db = new BePreferencesEntities();
-            return Content(db.InkeyProducts.FirstOrDefault(i => i.InkeyProductsId == id).ProductImageLink);
+            string test = db.InkeyProducts.FirstOrDefault(i => i.InkeyProductsId == id).ProductImageLink + "," + db.InkeyProducts.FirstOrDefault(i => i.InkeyProductsId == id).ProductLink;
+            return Content(db.InkeyProducts.FirstOrDefault(i => i.InkeyProductsId == id).ProductImageLink + "," + db.InkeyProducts.FirstOrDefault(i => i.InkeyProductsId == id).ProductLink);
         }
 
         #endregion
@@ -253,5 +256,76 @@ namespace BePreferenceCentre.Controllers
 
         #endregion
 
+
+        #region "API test"
+
+        public ActionResult TestAPI()
+        {
+            return View();
+        }
+
+        #endregion
+
+
+        #region "import questions"
+
+        public ActionResult InkeyImport()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult ReadExcel(System.Web.HttpPostedFileBase upload)
+        {
+
+            try
+            {
+                string test = Path.GetExtension(upload.FileName);
+                if (Path.GetExtension(upload.FileName) == ".xlsx" || Path.GetExtension(upload.FileName) == ".xls")
+                {
+                    ExcelPackage package = new ExcelPackage(upload.InputStream);
+
+                    List<InkeyAnswer> questions = new List<InkeyAnswer>();
+
+                    questions = ExcelHelper.PopulateAttendees(package.Workbook.Worksheets.FirstOrDefault(), true).ToList();
+
+                    CheckQuestionsandAddtoDatabase(questions);
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            return View("InkeyImport");
+        }
+
+
+
+        private void CheckQuestionsandAddtoDatabase(List<InkeyAnswer> attendeesToAdd)
+        {
+            try
+            {
+                using (var db = new BePreferencesEntities())
+                {
+                    foreach (InkeyAnswer question in attendeesToAdd)
+                    {
+                        db.InkeyAnswers.Add(question);
+                        db.SaveChanges();
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        #endregion
     }
 }

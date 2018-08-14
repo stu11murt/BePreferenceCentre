@@ -27,7 +27,9 @@ namespace BePreferenceCentre.DAL
     
         public virtual DbSet<BEMailingList> BEMailingLists { get; set; }
         public virtual DbSet<BEMemberList> BEMemberLists { get; set; }
-        public virtual DbSet<InkeyAnswer> InkeyAnswers { get; set; }
         public virtual DbSet<InkeyProduct> InkeyProducts { get; set; }
+        public virtual DbSet<InkeyProductTag> InkeyProductTags { get; set; }
+        public virtual DbSet<InkeyUserQuestion> InkeyUserQuestions { get; set; }
+        public virtual DbSet<InkeyAnswer> InkeyAnswers { get; set; }
     }
 }

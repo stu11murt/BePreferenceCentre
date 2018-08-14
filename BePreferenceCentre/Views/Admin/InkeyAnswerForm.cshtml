@@ -164,41 +164,46 @@
         }
     </div>
 </div>
-
-@section Scripts {
-    @*<script src="~/Scripts/jquery-3.3.1.js"></script>
-        <script src="~/Scripts/bootstrap.min.js"></script>
-        <script src="~/Scripts/popper.js"></script>
-        <script src="~/Scripts/summernote/summernote.min.js"></script>
-        <script src="~/Scripts/summernote/summernote-bs4.js"></script>*@
+@section Styles {
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Scripts/summernote/summernote-bs4.css" rel="stylesheet" />
-    @Scripts.Render("~/bundles/inkey")
-    @Scripts.Render("~/bundles/jquery")
+    <link href="~/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="~/Content/DataTables/css/fixedHeader.dataTables.min.css" rel="stylesheet" />
+    <link href="~/Content/DataTables/css/responsive.bootstrap4.min.css" rel="stylesheet" />
+    @Styles.Render("~/Content/datatables")
+}
+@section Scripts {
+
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.5/umd/popper.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/summernote/summernote-bs4.min.js"></script>
+    @Scripts.Render("~/bundles/datatables")
     <script>
         ShowForm();
 
         $(document).ready(function () {
-            $('#answer_InstructionsForUse').summernote();
+            $('#answer_InstructionsForUse').summernote({
+                height: 300
+            });
 
             $('#answer_Question').val("");
             $('#answer_Answer').val("");
             $('#answer_ProductImageLink').val("");
             $('#answer_ProductLink').val("");
-
-           
-
-
         });
 
 
         $('#answer_ProductName').on('change', function () {
             console.log("ID : " + $("#answer_ProductName").val());
             $.ajax({
-                url: "../Admin/GetProductLink?id=" + $("#answer_ProductName").val(),
+                url: "../Admin/GetProductLinks?id=" + $("#answer_ProductName").val(),
                 type: "GET",
             })
                 .done(function (result) {
-                    $('#answer_ProductImageLink').val(result);
+                    var returnedString = result.split(",");
+                    $('#answer_ProductImageLink').val(returnedString[0]);
+                    $('#answer_ProductLink').val(returnedString[1]);
                 });
 
             return false;

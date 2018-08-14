@@ -69,6 +69,25 @@ textarea {
     height: 100px;
 }
 
+/* Inkey Results */
+
+.inkey-phonetic {
+    font-weight:200;
+}
+
+.inkey-related {
+    font-size:80%;
+    width:350px;
+}
+
+.inkey-related span {
+    font-size:120%;
+}
+
+.inkey-result {
+    width: 600px;
+    padding: 0 50px;
+}
 
 .ink-buttons {
     margin-top: 50px;
@@ -94,6 +113,8 @@ textarea {
     float:right;
     margin-right:3%;
 }
+
+
 
 #inkey-results-row {
     margin-top: 50px;

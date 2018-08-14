@@ -12,11 +12,10 @@ namespace BePreferenceCentre.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class InkeyProduct
+    public partial class InkeyUserQuestion
     {
-        public int InkeyProductsId { get; set; }
-        public string ProductName { get; set; }
-        public string ProductImageLink { get; set; }
-        public string ProductLink { get; set; }
+        public int InkeyUserQuestionsId { get; set; }
+        public string UserQuestion { get; set; }
+        public System.DateTime Created { get; set; }
     }
 }

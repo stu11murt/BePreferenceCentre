@@ -5,21 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - BE</title>
     @Styles.Render("~/Content/css")
-    @Styles.Render("~/Content/thirds")
-    @Scripts.Render("~/bundles/modernizr")
-    @RenderSection("styles", required: false)
+   @Scripts.Render("~/bundles/modernizr")
+   @RenderSection("styles", required: false)
 </head>
 <body>
-   <div class="container body-content">
+    <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - BE for Beauty Preference Centre</p>
         </footer>
     </div>
-   
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
 </html>

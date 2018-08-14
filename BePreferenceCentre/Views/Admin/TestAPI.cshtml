@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "TestAPI";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>TestAPI</h2>
+
+<div id="questions">
+
+</div>
+
+<a href="@Url.Action("GetInkeyAnswers", "InkeyAnswers")" class="btn btn-primary">Booooom</a>
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+    var uri = 'api/GetInkeyAnswers';
+
+    $(document).ready(function () {
+      // Send an AJAX request
+      $.getJSON(uri)
+          .done(function (data) {
+            // On success, 'data' contains a list of products.
+            //$.each(data, function (key, item) {
+              // Add a list item for the product.
+                $('#questions').html(data);
+            //});
+          });
+    });
+
+    function formatItem(item) {
+      return item.Name + ': $' + item.Price;
+    }
+
+    
+</script>
