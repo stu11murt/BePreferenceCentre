@@ -1,5 +1,5 @@
-﻿//var answers = JSON.parse($('#InkeyJsonAnswers').val());
-var answers = JSON.parse(GetAnswers());
+﻿var answers = JSON.parse($('#InkeyJsonAnswers').val());
+//var answers = JSON.parse(GetAnswers());
 //var jsonFile = readTextFile("/Scripts/Json/inkey.json");
 //var allText = "";
 //function readTextFile(file) {
@@ -16,11 +16,15 @@ var answers = JSON.parse(GetAnswers());
 //    }
 //    rawFile.send(null);
 //}
+var questionId = 0;
 
+$(document).ready(function () {
+    $('#userEmailSubmit').hide();
+});
 
 var options = {
     shouldSort: true,
-    tokenise: true,
+    tokenise: false,
     includeAllMatches: true,
     threshold: 0.3,
     distance: 100,
@@ -49,7 +53,7 @@ function DoSearch(srchValue) {
         i++;
     });
 
-    if (i == 0) {
+    if (i === 0) {
         var InkeyQuestion = {
             UserQuestion: $('#searchTextbox').val()
         };
@@ -60,8 +64,11 @@ function DoSearch(srchValue) {
             type: "POST",
         })
             .done(function (result) {
-                console.log(result.UserQuestion);
-                $('#inkey-results').html('<div><p>Hi, we are really sorry but we have not got an answer to this question at the moment, however your question has been logged and we will answer it a.s.a.p</p></div>').addClass('fadeIn');
+                console.log(result);
+                questionId = result.InkeyUserQuestionsId;
+                console.log(questionId);
+                $('#inkey-results').html('<div><p>Hi, we are really sorry but we have not got an answer to this question at the moment, however your question has been logged and we will answer it a.s.a.p</p><p>Enter your email address below to get a personal response to this question.</p></div>').addClass('fadeIn');
+                $('#userEmailSubmit').show();
             });
 
         return false;
@@ -102,7 +109,7 @@ $('#ask-inkey').click(function () {
 });
 
 $('#searchTextbox').keydown(function (e) {
-    if (e.keyCode == 13) {
+    if (e.keyCode === 13) {
         $('#inkey-results').html("");
         DoSearch($('#searchTextbox').val());
     }
@@ -114,7 +121,41 @@ function GetProductImage(productRef) {
         case "Lactic Acid":
             console.log("TEST");
             return "{{ 'bod400.jpg' | asset_img_url }}";
-            break;
+            
 
     }
 }
+
+
+$('#submitUserEmail').click(function () {
+   
+    var InkeyQuestion = {
+        InkeyUserQuestionsId: questionId,
+        userEmail: $('#userEmail').val()
+    };
+    
+    $.ajax({
+        url: '../api/InkeyUserQuestionsEmail',
+        data: InkeyQuestion,
+        type: "POST",
+        success: function (msg) {
+            $('#inkey-results').html("");
+            $('#inkey-results').html('<div><p>Thank you, we will be in touch as soon as possible.</p></div>');
+            $('#userEmailSubmit').hide();
+        },
+        error: function (errormessage) {
+            $('#inkey-results').html("");
+            $('#inkey-results').html('<div><p>Sorry this email address does not seem valid. Please try again.</p></div>');
+           
+        }
+    })
+        
+
+    return false;
+});
+
+
+/*.done(function (result) {
+            console.log(result);
+           
+        });*/

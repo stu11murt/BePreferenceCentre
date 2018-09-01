@@ -125,8 +125,9 @@ namespace BePreferenceCentre.Controllers
                 InkeyAnswer newAns = inkMod.answer;
                 using (var db = new BePreferencesEntities())
                 {
-                    //db.InkeyAnswers.Add(newAns);
-                    //db.SaveChanges();
+                    newAns.ProductName = db.InkeyProducts.FirstOrDefault(p => p.InkeyProductsId == inkMod.answer.ProductId).ProductName;
+                    db.InkeyAnswers.Add(newAns);
+                    db.SaveChanges();
 
                     return View(new InkeyViewModel());
                 }
@@ -141,6 +142,8 @@ namespace BePreferenceCentre.Controllers
         public ActionResult EditQuestion(int id)
         {
             BePreferencesEntities db = new BePreferencesEntities();
+            InkeyAnswer answerToEdit = db.InkeyAnswers.FirstOrDefault(i => i.InkeyAnswersId == id);
+            //answerToEdit.ProductName = db.InkeyProducts.FirstOrDefault(p => p.InkeyProductsId == (int)answerToEdit.ProductId).ProductName;
             return View(db.InkeyAnswers.FirstOrDefault(i => i.InkeyAnswersId == id));
         }
 
@@ -152,6 +155,7 @@ namespace BePreferenceCentre.Controllers
             {
                 using (var db = new BePreferencesEntities())
                 {
+                    inkAnswer.ProductName = db.InkeyProducts.FirstOrDefault(p => p.InkeyProductsId == inkAnswer.ProductId).ProductName;
                     db.Entry(inkAnswer).State = System.Data.Entity.EntityState.Modified;
                     db.SaveChanges();
                 }
@@ -169,8 +173,8 @@ namespace BePreferenceCentre.Controllers
         public ActionResult GetProductLinks(int id)
         {
             BePreferencesEntities db = new BePreferencesEntities();
-            string test = db.InkeyProducts.FirstOrDefault(i => i.InkeyProductsId == id).ProductImageLink + "," + db.InkeyProducts.FirstOrDefault(i => i.InkeyProductsId == id).ProductLink;
-            return Content(db.InkeyProducts.FirstOrDefault(i => i.InkeyProductsId == id).ProductImageLink + "," + db.InkeyProducts.FirstOrDefault(i => i.InkeyProductsId == id).ProductLink);
+            string test = db.InkeyProducts.FirstOrDefault(i => i.InkeyProductsId == id).ProductImageLink + "," + db.InkeyProducts.FirstOrDefault(i => i.InkeyProductsId == id).ProductLink + "," + db.InkeyProducts.FirstOrDefault(i => i.InkeyProductsId == id).PhoneticName;
+            return Content(db.InkeyProducts.FirstOrDefault(i => i.InkeyProductsId == id).ProductImageLink + "," + db.InkeyProducts.FirstOrDefault(i => i.InkeyProductsId == id).ProductLink + "," + db.InkeyProducts.FirstOrDefault(i => i.InkeyProductsId == id).PhoneticName);
         }
 
         #endregion
@@ -288,7 +292,7 @@ namespace BePreferenceCentre.Controllers
 
                     List<InkeyAnswer> questions = new List<InkeyAnswer>();
 
-                    questions = ExcelHelper.PopulateAttendees(package.Workbook.Worksheets.FirstOrDefault(), true).ToList();
+                    questions = ExcelHelper.PopulateAnswers(package.Workbook.Worksheets.FirstOrDefault(), true).ToList();
 
                     CheckQuestionsandAddtoDatabase(questions);
                 }

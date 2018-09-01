@@ -28,11 +28,27 @@
                                 @Html.LabelFor(m => m.ProductName, new { @class = "col-sm-2 control-label" })
                                 <div class="col-sm-6">
                                     @*@Html.TextBoxFor(m => m.answer.ProductName, new { @class = "form-control boxsizingBorder" })*@
-                                    @Html.DropDownListFor(m => m.ProductName, DropDownLists.GetDropDownListForInkeyProducts(), "- Select Product Name -", new { @class = "form-control" })
+                                    @Html.DropDownListFor(m => m.ProductId, DropDownLists.GetDropDownListForInkeyProducts(), "- Select Product Name -", new { @class = "form-control" })
                                 </div>
                             </div>
                             <div class="col-sm-offset-2">
                                 @Html.ValidationMessageFor(m => m.ProductName, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.PhoneticName, new { @class = "col-sm-2 control-label" })
+                                <div class="col-sm-6">
+                                    @Html.TextBoxFor(m => m.PhoneticName, new { @class = "form-control boxsizingBorder" })
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Concern, new { @class = "col-sm-2 control-label" })
+                                <div class="col-sm-6">
+                                    @Html.TextBoxFor(m => m.Concern, new { @class = "form-control boxsizingBorder" })
+                                </div>
                             </div>
                             <div class="hr-line-dashed"></div>
 
@@ -80,6 +96,47 @@
                             </div>
                             <div class="col-sm-offset-2">
                                 @Html.ValidationMessageFor(m => m.ProductLink, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Segmentation, new { @class = "col-sm-2 control-label" })
+                                <div class="col-sm-6">
+                                    @Html.TextBoxFor(m => m.Segmentation, new { @class = "form-control boxsizingBorder" })
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.BlogLink1, new { @class = "col-sm-2 control-label" })
+                                <div class="col-sm-6">
+                                    @Html.TextBoxFor(m => m.BlogLink1, new { @class = "form-control boxsizingBorder" })
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.BlogLink2, new { @class = "col-sm-2 control-label" })
+                                <div class="col-sm-6">
+                                    @Html.TextBoxFor(m => m.BlogLink2, new { @class = "form-control boxsizingBorder" })
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.BlogLink3, new { @class = "col-sm-2 control-label" })
+                                <div class="col-sm-6">
+                                    @Html.TextBoxFor(m => m.BlogLink3, new { @class = "form-control boxsizingBorder" })
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.BlogLink4, new { @class = "col-sm-2 control-label" })
+                                <div class="col-sm-6">
+                                    @Html.TextBoxFor(m => m.BlogLink4, new { @class = "form-control boxsizingBorder" })
+                                </div>
                             </div>
                             <div class="hr-line-dashed"></div>
 

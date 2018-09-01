@@ -36,16 +36,22 @@
           <Key>
             <PropertyRef Name="InkeyAnswersId" />
           </Key>
-          <Property Name="InkeyAnswersId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductName" Type="nvarchar" MaxLength="255" />
+          <Property Name="Concern" Type="nvarchar" MaxLength="50" />
           <Property Name="Question" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Answer" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="InkeyAnswersId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ProductLink" Type="nvarchar" MaxLength="512" Nullable="false" />
           <Property Name="ProductImageLink" Type="nvarchar" MaxLength="512" Nullable="false" />
-          <Property Name="ProductName" Type="nvarchar" MaxLength="255" />
           <Property Name="InstructionsForUse" Type="nvarchar(max)" />
           <Property Name="Segmentation" Type="nvarchar" MaxLength="50" />
           <Property Name="ProductId" Type="int" />
-          <Property Name="Concern" Type="nvarchar" MaxLength="50" />
+          <Property Name="BlogLink1" Type="nvarchar" MaxLength="255" />
+          <Property Name="BlogLink2" Type="nvarchar" MaxLength="255" />
+          <Property Name="BlogLink3" Type="nvarchar" MaxLength="255" />
+          <Property Name="BlogLink4" Type="nvarchar" MaxLength="255" />
+          <Property Name="BlogLink5" Type="nvarchar" MaxLength="255" />
+          <Property Name="PhoneticName" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="InkeyProducts">
           <Key>
@@ -55,6 +61,7 @@
           <Property Name="ProductName" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="ProductImageLink" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="ProductLink" Type="nvarchar" MaxLength="512" Nullable="false" />
+          <Property Name="PhoneticName" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="InkeyProductTag">
           <Key>
@@ -71,6 +78,7 @@
           <Property Name="InkeyUserQuestionsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserQuestion" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="userEmail" Type="nvarchar" MaxLength="512" />
         </EntityType>
         <EntityContainer Name="BePreferencesModelStoreContainer">
           <EntitySet Name="BEMailingLists" EntityType="Self.BEMailingLists" Schema="dbo" store:Type="Tables" />
@@ -87,10 +95,10 @@
         <EntityContainer Name="BePreferencesEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="BEMailingLists" EntityType="BePreferencesModel.BEMailingList" />
           <EntitySet Name="BEMemberLists" EntityType="BePreferencesModel.BEMemberList" />
-          <EntitySet Name="InkeyProducts" EntityType="BePreferencesModel.InkeyProduct" />
           <EntitySet Name="InkeyProductTags" EntityType="BePreferencesModel.InkeyProductTag" />
           <EntitySet Name="InkeyUserQuestions" EntityType="BePreferencesModel.InkeyUserQuestion" />
           <EntitySet Name="InkeyAnswers" EntityType="BePreferencesModel.InkeyAnswer" />
+          <EntitySet Name="InkeyProducts" EntityType="BePreferencesModel.InkeyProduct" />
         </EntityContainer>
         <EntityType Name="BEMailingList">
           <Key>
@@ -119,15 +127,6 @@
           <Property Name="ListId" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
           <Property Name="Archived" Type="Boolean" Nullable="false" />
         </EntityType>
-        <EntityType Name="InkeyProduct">
-          <Key>
-            <PropertyRef Name="InkeyProductsId" />
-          </Key>
-          <Property Name="InkeyProductsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ProductName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="ProductImageLink" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="ProductLink" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="InkeyProductTag">
           <Key>
             <PropertyRef Name="InkeyProductTagsId" />
@@ -143,21 +142,38 @@
           <Property Name="InkeyUserQuestionsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserQuestion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="userEmail" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="InkeyAnswer">
           <Key>
             <PropertyRef Name="InkeyAnswersId" />
           </Key>
-          <Property Name="InkeyAnswersId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Concern" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Question" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Answer" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InkeyAnswersId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ProductLink" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
           <Property Name="ProductImageLink" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
-          <Property Name="ProductName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="InstructionsForUse" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Segmentation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ProductId" Type="Int32" />
-          <Property Name="Concern" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BlogLink1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="BlogLink2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="BlogLink3" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="BlogLink4" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="BlogLink5" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneticName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="InkeyProduct">
+          <Key>
+            <PropertyRef Name="InkeyProductsId" />
+          </Key>
+          <Property Name="InkeyProductsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ProductImageLink" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ProductLink" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneticName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -194,16 +210,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="InkeyProducts">
-            <EntityTypeMapping TypeName="BePreferencesModel.InkeyProduct">
-              <MappingFragment StoreEntitySet="InkeyProducts">
-                <ScalarProperty Name="ProductLink" ColumnName="ProductLink" />
-                <ScalarProperty Name="ProductImageLink" ColumnName="ProductImageLink" />
-                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
-                <ScalarProperty Name="InkeyProductsId" ColumnName="InkeyProductsId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="InkeyProductTags">
             <EntityTypeMapping TypeName="BePreferencesModel.InkeyProductTag">
               <MappingFragment StoreEntitySet="InkeyProductTag">
@@ -216,6 +222,7 @@
           <EntitySetMapping Name="InkeyUserQuestions">
             <EntityTypeMapping TypeName="BePreferencesModel.InkeyUserQuestion">
               <MappingFragment StoreEntitySet="InkeyUserQuestions">
+                <ScalarProperty Name="userEmail" ColumnName="userEmail" />
                 <ScalarProperty Name="Created" ColumnName="Created" />
                 <ScalarProperty Name="UserQuestion" ColumnName="UserQuestion" />
                 <ScalarProperty Name="InkeyUserQuestionsId" ColumnName="InkeyUserQuestionsId" />
@@ -225,16 +232,33 @@
           <EntitySetMapping Name="InkeyAnswers">
             <EntityTypeMapping TypeName="BePreferencesModel.InkeyAnswer">
               <MappingFragment StoreEntitySet="InkeyAnswers">
-                <ScalarProperty Name="Concern" ColumnName="Concern" />
+                <ScalarProperty Name="PhoneticName" ColumnName="PhoneticName" />
+                <ScalarProperty Name="BlogLink5" ColumnName="BlogLink5" />
+                <ScalarProperty Name="BlogLink4" ColumnName="BlogLink4" />
+                <ScalarProperty Name="BlogLink3" ColumnName="BlogLink3" />
+                <ScalarProperty Name="BlogLink2" ColumnName="BlogLink2" />
+                <ScalarProperty Name="BlogLink1" ColumnName="BlogLink1" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="Segmentation" ColumnName="Segmentation" />
                 <ScalarProperty Name="InstructionsForUse" ColumnName="InstructionsForUse" />
-                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
                 <ScalarProperty Name="ProductImageLink" ColumnName="ProductImageLink" />
                 <ScalarProperty Name="ProductLink" ColumnName="ProductLink" />
+                <ScalarProperty Name="InkeyAnswersId" ColumnName="InkeyAnswersId" />
                 <ScalarProperty Name="Answer" ColumnName="Answer" />
                 <ScalarProperty Name="Question" ColumnName="Question" />
-                <ScalarProperty Name="InkeyAnswersId" ColumnName="InkeyAnswersId" />
+                <ScalarProperty Name="Concern" ColumnName="Concern" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InkeyProducts">
+            <EntityTypeMapping TypeName="BePreferencesModel.InkeyProduct">
+              <MappingFragment StoreEntitySet="InkeyProducts">
+                <ScalarProperty Name="PhoneticName" ColumnName="PhoneticName" />
+                <ScalarProperty Name="ProductLink" ColumnName="ProductLink" />
+                <ScalarProperty Name="ProductImageLink" ColumnName="ProductImageLink" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="InkeyProductsId" ColumnName="InkeyProductsId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

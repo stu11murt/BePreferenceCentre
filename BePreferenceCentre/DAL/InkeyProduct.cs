@@ -18,5 +18,6 @@ namespace BePreferenceCentre.DAL
         public string ProductName { get; set; }
         public string ProductImageLink { get; set; }
         public string ProductLink { get; set; }
+        public string PhoneticName { get; set; }
     }
 }

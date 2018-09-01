@@ -14,15 +14,21 @@ namespace BePreferenceCentre.DAL
     
     public partial class InkeyAnswer
     {
-        public int InkeyAnswersId { get; set; }
+        public string ProductName { get; set; }
+        public string Concern { get; set; }
         public string Question { get; set; }
         public string Answer { get; set; }
+        public int InkeyAnswersId { get; set; }
         public string ProductLink { get; set; }
         public string ProductImageLink { get; set; }
-        public string ProductName { get; set; }
         public string InstructionsForUse { get; set; }
         public string Segmentation { get; set; }
         public Nullable<int> ProductId { get; set; }
-        public string Concern { get; set; }
+        public string BlogLink1 { get; set; }
+        public string BlogLink2 { get; set; }
+        public string BlogLink3 { get; set; }
+        public string BlogLink4 { get; set; }
+        public string BlogLink5 { get; set; }
+        public string PhoneticName { get; set; }
     }
 }

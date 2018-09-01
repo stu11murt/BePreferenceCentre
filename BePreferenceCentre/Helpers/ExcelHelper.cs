@@ -11,7 +11,7 @@ namespace BePreferenceCentre.Helpers
 {
     public static class ExcelHelper
     {
-        public static IEnumerable<InkeyAnswer> PopulateAttendees(ExcelWorksheet workSheet, bool firstRowHeader)
+        public static IEnumerable<InkeyAnswer> PopulateAnswers(ExcelWorksheet workSheet, bool firstRowHeader)
         {
             IList<InkeyAnswer> questions = new List<InkeyAnswer>();
 
@@ -30,19 +30,23 @@ namespace BePreferenceCentre.Helpers
                     }
                     else
                     {
-                        if (!string.IsNullOrEmpty(ExcelHelper.ParseWorksheetValue(workSheet, header, rowIndex, "Answer")))
+                        if (!string.IsNullOrEmpty(ExcelHelper.ParseWorksheetValue(workSheet, header, rowIndex, "Question")))
                         {
                             questions.Add(new InkeyAnswer
                             {
                                 Question = ParseWorksheetValue(workSheet, header, rowIndex, "Question"),
                                 Answer = ParseWorksheetValue(workSheet, header, rowIndex, "Answer"),
-                                Segmentation = ParseWorksheetValue(workSheet, header, rowIndex, "SEGMENTATION"),
-                                Concern = ParseWorksheetValue(workSheet, header, rowIndex, "CONCERN"),
-                                ProductName = ParseWorksheetValue(workSheet, header, rowIndex, "PRODUCT"),
+                                Segmentation = ParseWorksheetValue(workSheet, header, rowIndex, "Segmentation"),
+                                Concern = ParseWorksheetValue(workSheet, header, rowIndex, "concern"),
+                                ProductName = ParseWorksheetValue(workSheet, header, rowIndex, "Product"),
                                 ProductLink = ParseWorksheetValue(workSheet, header, rowIndex, "ProductLink"),
                                 InstructionsForUse = "NA",
-                                ProductImageLink = "NA"
-
+                                ProductImageLink = "NA",
+                                BlogLink1 = ParseWorksheetValue(workSheet, header, rowIndex, "Bloglink1"),
+                                BlogLink2 = ParseWorksheetValue(workSheet, header, rowIndex, "bloglink2"),
+                                BlogLink3 = ParseWorksheetValue(workSheet, header, rowIndex, "bloglink3"),
+                                BlogLink4 = ParseWorksheetValue(workSheet, header, rowIndex, "bloglink4"),
+                                PhoneticName = ParseWorksheetValue(workSheet, header, rowIndex, "Phonetics")
                             });
                         }
 

@@ -17,5 +17,6 @@ namespace BePreferenceCentre.DAL
         public int InkeyUserQuestionsId { get; set; }
         public string UserQuestion { get; set; }
         public System.DateTime Created { get; set; }
+        public string userEmail { get; set; }
     }
 }

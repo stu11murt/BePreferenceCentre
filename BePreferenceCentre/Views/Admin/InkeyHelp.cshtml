@@ -27,15 +27,25 @@
                 <table id="inkey-results-table" class="table-borderless" cellpadding="20">
                     <tbody id="inkey-results"></tbody>
                 </table>
+                <div id="userEmailSubmit">
+                    <input type="text" name="userEmail" id="userEmail" class="input-group-text" /><a href="#" id="submitUserEmail" class="btn btn-primary">Submit</a>
+                </div>
             </div>
         </div>
     </div>
     <div class="row" id="inkey-button">
-        <a href="@Url.Action("InkeyAnswerForm", "Admin")" class="btn btn-primary">Inkey Question Form</a>
-        <a href="@Url.Action("Download", "Admin")" id="savFile" class="btn btn-danger">Save File</a>
-    </div>
+        <div class="help-buttons col-lg-3">
+            <a href="@Url.Action("InkeyAnswerForm", "Admin")" class="btn btn-primary">Inkey Question Form</a>
+        </div>
+        <div class="help-buttons col-lg-3"">
+            <a href="@Url.Action("InkeyImport", "Admin")" class="btn btn-secondary float-right">Import Questions</a>
+        </div>
+        <div class="help-buttons col-lg-3"">
+            <a href="@Url.Action("Download", "Admin")" id="savFile" class="btn btn-danger">Save File</a>
+        </div>
+      </div>
 
-</div>
+    </div>
 
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>

@@ -173,6 +173,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InkeyUserQuestionsController.cs" />
+    <Compile Include="Controllers\InkeyUserQuestionsEmailController.cs" />
     <Compile Include="DAL\BEMailingList.cs">
       <DependentUpon>BEPref.tt</DependentUpon>
     </Compile>

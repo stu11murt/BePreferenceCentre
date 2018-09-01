@@ -48,11 +48,27 @@
                                 @Html.LabelFor(m => m.answer.ProductName, new { @class = "col-sm-2 control-label" })
                                 <div class="col-sm-6">
                                     @*@Html.TextBoxFor(m => m.answer.ProductName, new { @class = "form-control boxsizingBorder" })*@
-                                    @Html.DropDownListFor(m => m.answer.ProductName, DropDownLists.GetDropDownListForInkeyProducts(), "- Select Product Name -", new { @class = "form-control" })
+                                    @Html.DropDownListFor(m => m.answer.ProductId, DropDownLists.GetDropDownListForInkeyProducts(), "- Select Product Name -", new { @class = "form-control" })
                                 </div>
                             </div>
                             <div class="col-sm-offset-2">
-                                @Html.ValidationMessageFor(m => m.answer.ProductName, "", new { @class = "text-danger" })
+                                @Html.ValidationMessageFor(m => m.answer.ProductId, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.answer.PhoneticName, new { @class = "col-sm-2 control-label" })
+                                <div class="col-sm-6">
+                                    @Html.TextBoxFor(m => m.answer.PhoneticName, new { @class = "form-control boxsizingBorder" })
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.answer.Concern, new { @class = "col-sm-2 control-label" })
+                                <div class="col-sm-6">
+                                    @Html.TextBoxFor(m => m.answer.Concern, new { @class = "form-control boxsizingBorder" })
+                                </div>
                             </div>
                             <div class="hr-line-dashed"></div>
 
@@ -104,6 +120,48 @@
                             <div class="hr-line-dashed"></div>
 
                             <div class="form-group">
+                                @Html.LabelFor(m => m.answer.Segmentation, new { @class = "col-sm-2 control-label" })
+                                <div class="col-sm-6">
+                                    @Html.TextBoxFor(m => m.answer.Segmentation, new { @class = "form-control boxsizingBorder" })
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.answer.BlogLink1, new { @class = "col-sm-2 control-label" })
+                                <div class="col-sm-6">
+                                    @Html.TextBoxFor(m => m.answer.BlogLink1, new { @class = "form-control boxsizingBorder" })
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.answer.BlogLink2, new { @class = "col-sm-2 control-label" })
+                                <div class="col-sm-6">
+                                    @Html.TextBoxFor(m => m.answer.BlogLink2, new { @class = "form-control boxsizingBorder" })
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.answer.BlogLink3, new { @class = "col-sm-2 control-label" })
+                                <div class="col-sm-6">
+                                    @Html.TextBoxFor(m => m.answer.BlogLink3, new { @class = "form-control boxsizingBorder" })
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.answer.BlogLink4, new { @class = "col-sm-2 control-label" })
+                                <div class="col-sm-6">
+                                    @Html.TextBoxFor(m => m.answer.BlogLink4, new { @class = "form-control boxsizingBorder" })
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+
+                            <div class="form-group">
                                 @Html.LabelFor(m => m.answer.InstructionsForUse, new { @class = "col-sm-2 control-label" })
                                 <div class="col-sm-12">
                                     @*<textarea name="answer.InstructionsForUse" id="InstructionsForUse"></textarea>*@
@@ -142,7 +200,7 @@
 
             <div class="row">
                 <div class="col-lg-3 subButt">
-                    <input type="submit" class="btn btn-primary float-left" value="Submit Booking" id="subbtn" />
+                    <input type="submit" class="btn btn-primary float-left" value="Submit Question" id="subbtn" />
                 </div>
                 <div class="col-lg-3">
                     <a href="@Url.Action("InkeyHelp", "Admin")" class="btn btn-info float-left" id="inkeyHelper">Inkey Helper</a>
@@ -204,6 +262,7 @@
                     var returnedString = result.split(",");
                     $('#answer_ProductImageLink').val(returnedString[0]);
                     $('#answer_ProductLink').val(returnedString[1]);
+                    $('#answer_PhoneticName').val(returnedString[2]);
                 });
 
             return false;

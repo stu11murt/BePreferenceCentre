@@ -40,8 +40,17 @@
                     </div>
                 </div>
                 <div class="hr-line-dashed"></div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Phonetic Name</label>
+                    <div class="col-sm-8">
+                        @Html.TextBoxFor(m => m.NewProduct.PhoneticName, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="hr-line-dashed"></div>
+
                 <div class="col-lg-6">
-                    <input type="submit" class="btn btn-primary" value="Add New Product" />
+                    <input type="submit" class="btn btn-primary" value="Add Product" />
                 </div>
             }
         </div>
@@ -61,6 +70,7 @@
     <script>
         $(document).ready(function () {
             $('#editproduct').hide();
+            $('#addProduct').hide();
         });
 
         function EditProductInfo(id) {
@@ -71,6 +81,7 @@
             })
                 .done(function (result) {
                     $('#addProduct').hide();
+                    $('#productPartial').hide();
                     $('#editproduct').show();
                     $('#editproduct').html(result);
                    
@@ -82,6 +93,7 @@
         function ShowNormalForm() {
             $('#editproduct').hide();
             $('#addProduct').show();
+            $('#productPartial').show();
         }
     </script>
 }
