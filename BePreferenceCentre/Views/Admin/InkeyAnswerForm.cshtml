@@ -252,10 +252,10 @@
         });
 
 
-        $('#answer_ProductName').on('change', function () {
-            console.log("ID : " + $("#answer_ProductName").val());
+        $('#answer_ProductId').on('change', function () {
+            console.log("ID : " + $("#answer_ProductId").val());
             $.ajax({
-                url: "../Admin/GetProductLinks?id=" + $("#answer_ProductName").val(),
+                url: "../Admin/GetProductLinks?id=" + $("#answer_ProductId").val(),
                 type: "GET",
             })
                 .done(function (result) {

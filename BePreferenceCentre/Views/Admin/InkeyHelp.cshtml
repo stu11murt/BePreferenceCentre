@@ -10,16 +10,12 @@
 
 <div class="container inkey-container">
     <div class="row" id="inkey-row">
-
         <div class="input-group col=lg-12">
             <input type="text" class="form-control inkey-question" placeholder="ask us anything..." id="searchTextbox" />
             <div class="input-group-append">
                 <input type="submit" class="btn btn-sm btn-info float-lg-right" value="Ask a Inkey Lister" id="ask-inkey" />
             </div>
         </div>
-
-
-
     </div>
     <div class="row" id="inkey-results-row">
         <div class="col-12">
@@ -37,17 +33,20 @@
         <div class="help-buttons col-lg-3">
             <a href="@Url.Action("InkeyAnswerForm", "Admin")" class="btn btn-primary">Inkey Question Form</a>
         </div>
-        <div class="help-buttons col-lg-3"">
+        <div class="help-buttons col-lg-3" ">
             <a href="@Url.Action("InkeyImport", "Admin")" class="btn btn-secondary float-right">Import Questions</a>
         </div>
-        <div class="help-buttons col-lg-3"">
+        <div class="help-buttons col-lg-3" ">
+            <a href="@Url.Action("UserQuestions", "Admin")" class="btn btn-secondary float-right">User Questions</a>
+        </div>
+        <div class="help-buttons col-lg-3" ">
             <a href="@Url.Action("Download", "Admin")" id="savFile" class="btn btn-danger">Save File</a>
         </div>
-      </div>
-
     </div>
 
-<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+</div>
+
+<script src="../Scripts/jquery-3.3.1.min.js"></script>
 <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
 <script src="~/Scripts/FuzzSearch/fuse.js"></script>
 <script src="~/Scripts/inkeySearch.js"></script>

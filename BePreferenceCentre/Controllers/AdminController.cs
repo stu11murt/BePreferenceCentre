@@ -260,7 +260,6 @@ namespace BePreferenceCentre.Controllers
 
         #endregion
 
-
         #region "API test"
 
         public ActionResult TestAPI()
@@ -269,7 +268,6 @@ namespace BePreferenceCentre.Controllers
         }
 
         #endregion
-
 
         #region "import questions"
 
@@ -331,5 +329,16 @@ namespace BePreferenceCentre.Controllers
         }
 
         #endregion
+
+        #region "Inkey User Questions"
+
+        public ActionResult UserQuestions()
+        {
+            BePreferencesEntities db = new BePreferencesEntities();
+            return View(db.InkeyUserQuestions.ToList());
+        }
+
+        #endregion
+
     }
 }
