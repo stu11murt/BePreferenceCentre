@@ -9,64 +9,58 @@
 
 </div>
 
-<div class="container-questions">
-    <div class="content animate-panel">
-        <div class="row" id="answers">
-            <div class="col-lg-12 col-md-12 col-sm-12">
-                <table cellpadding="20" cellspacing="20" class="table" id="inkey-answers">
-                    <thead>
-                        <tr>
-                            <th>Questions</th>
-                            <th>Email</th>
-                            <th>Date/Time Asked</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (InkeyUserQuestion userQuest in Model.OrderBy(c => c.Created))
-                        {
-                            <tr>
-                                <td>@userQuest.UserQuestion</td>
-                                <td>@userQuest.userEmail</td>
-                                <td>@userQuest.Created</td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
+
+
+<table cellpadding="20" cellspacing="20" class="table" id="inkey-answers" style="width:">
+    <thead>
+        <tr>
+            <th>Questions</th>
+            <th>Email</th>
+            <th>Date/Time Asked</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (InkeyUserQuestion userQuest in Model.OrderBy(c => c.Created))
+        {
+            <tr>
+                <td>@userQuest.UserQuestion</td>
+                <td>@userQuest.userEmail</td>
+                <td>@userQuest.Created</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+<div class="row user-question-buttons">
+        <div class="col-lg-4">
+            <a href="@Url.Action("InkeyHelp", "Admin")" class="btn btn-info float-left" id="inkeyHelper">Inkey Helper</a>
         </div>
-
-        <div class="row">
-            <div class="col-lg-4">
-                <a href="@Url.Action("InkeyHelp", "Admin")" class="btn btn-info float-left" id="inkeyHelper">Inkey Helper</a>
-            </div>
-            <div class="col-lg-4">
-                <a href="@Url.Action("ProductManager", "Admin")" class="btn  btn-secondary float-left" id="inkeyHelper">Product Manager</a>
-            </div>
+        <div class="col-lg-4">
+            <a href="@Url.Action("ProductManager", "Admin")" class="btn  btn-secondary float-left" id="inkeyHelper">Product Manager</a>
         </div>
-
-
     </div>
-</div>
+
+
+
 
 @section Styles {
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+  
     <link href="~/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
-    <link href="~/Content/DataTables/css/fixedHeader.dataTables.min.css" rel="stylesheet" />
-    <link href="~/Content/DataTables/css/responsive.bootstrap4.min.css" rel="stylesheet" />
-    @Styles.Render("~/Content/datatables")
-}
+ }
+   
 @section Scripts {
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.5/umd/popper.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
-    @Scripts.Render("~/bundles/datatables")
+    <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+    
 
     <script>
         var table = $('#inkey-answers').DataTable({
-            responsive: true
+            "pageLength": 50
         });
 
-        new $.fn.dataTable.FixedHeader(table);
+        
     </script>
 }
 

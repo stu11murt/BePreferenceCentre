@@ -166,3 +166,8 @@ textarea {
 #buttons {
     display:none;
 }
+
+.user-question-buttons
+{
+   margin-top:50px;
+}
