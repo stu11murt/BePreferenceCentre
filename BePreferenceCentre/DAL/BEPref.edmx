@@ -92,7 +92,7 @@
           </Key>
           <Property Name="StoreName" Type="nvarchar" MaxLength="250" />
           <Property Name="Region" Type="nvarchar" MaxLength="20" />
-          <Property Name="Address" Type="nvarchar" MaxLength="250" />
+          <Property Name="Address" Type="nvarchar" MaxLength="512" />
           <Property Name="City" Type="nvarchar" MaxLength="150" />
           <Property Name="District" Type="nvarchar" MaxLength="150" />
           <Property Name="InkeyStoresUSId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
@@ -228,7 +228,7 @@
           </Key>
           <Property Name="StoreName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="Region" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
           <Property Name="City" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="District" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="InkeyStoresUSId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />

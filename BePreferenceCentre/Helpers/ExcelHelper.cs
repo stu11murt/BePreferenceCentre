@@ -172,7 +172,7 @@ namespace BePreferenceCentre.Helpers
 
                                 City = ParseWorksheetValue(workSheet, header, rowIndex, "city"),
                                 Region = ParseWorksheetValue(workSheet, header, rowIndex, "Region"),
-                                Address = "<a href='https://maps.google.com/?q=" + ParseWorksheetValue(workSheet, header, rowIndex, "Address") + "</a>",
+                                Address = "<a href='https://maps.google.com/?q=" + ParseWorksheetValue(workSheet, header, rowIndex, "Address") + "' target='_blank' >"+ ParseWorksheetValue(workSheet, header, rowIndex, "Address") + "</a>",
                                 StoreName = ParseWorksheetValue(workSheet, header, rowIndex, "Store Name"),
                                 StoreRegion = ParseWorksheetValue(workSheet, header, rowIndex, "region"),
                                 Store = ParseWorksheetValue(workSheet, header, rowIndex, "Store")
