@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "ImportStores";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="jumbotron" id="inkey-jumbo">
+
+</div>
+
+<div class="content animate-panel">
+    <div class="row" id="inkeyform">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="hpanel">
+                <div class="panel-heading">
+                    <div class="panel-tools">
+                        <a class="showhide"><i class="fa fa-chevron-up"></i></a>
+                    </div>
+
+                </div>
+                <div class="panel-body">
+                    @using (Html.BeginForm("ReadExcelStores", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        <div class="form-group">
+                            <label>Upload Excel File for Inkey Questions</label>
+                            <input type="file" id="upload" name="upload" />
+                        </div>
+                        <input type="submit" class="btn btn-primary" value="Upload File" />
+                    }
+                </div>
+
+                <div class="panel-body">
+                    @using (Html.BeginForm("ReadExcelStoresUS", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        <div class="form-group">
+                            <label>Upload Excel File for Inkey Questions (US STORES)</label>
+                            <input type="file" id="upload" name="upload" />
+                        </div>
+                        <input type="submit" class="btn btn-primary" value="Upload File" />
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <br />
+    <div class="row">
+        <a href="@Url.Action("InkeyHelp", "Admin")" class="btn btn-secondary">Back to Inkey Translator</a>
+    </div>
+</div>
+
+

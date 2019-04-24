@@ -89,6 +89,22 @@ namespace BePreferenceCentre.Controllers
             return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
         }
 
+        public FileResult DownloadStores()
+        {
+            InkeyStoreViewModel inkViewMod = new InkeyStoreViewModel();
+            byte[] fileBytes = Encoding.ASCII.GetBytes(inkViewMod.InkeyJsonStores);
+            string fileName = "inkeyStores.json";
+            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+        }
+
+        public FileResult DownloadStoresUS()
+        {
+            InkeyStoreViewModel inkViewMod = new InkeyStoreViewModel();
+            byte[] fileBytes = Encoding.ASCII.GetBytes(inkViewMod.InkeyJsonStoresUS);
+            string fileName = "inkeyStoresUS.json";
+            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+        }
+
 
         public ActionResult Animated()
         {
@@ -305,6 +321,67 @@ namespace BePreferenceCentre.Controllers
             return View("InkeyImport");
         }
 
+        public ActionResult ImportStores()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ReadExcelStores(System.Web.HttpPostedFileBase upload)
+        {
+
+            try
+            {
+                string test = Path.GetExtension(upload.FileName);
+                if (Path.GetExtension(upload.FileName) == ".xlsx" || Path.GetExtension(upload.FileName) == ".xls")
+                {
+                    ExcelPackage package = new ExcelPackage(upload.InputStream);
+
+                    List<InkeyStore> stores = new List<InkeyStore>();
+
+                    stores = ExcelHelper.PopulateStoresAmended(package.Workbook.Worksheets.FirstOrDefault(), true).ToList();
+
+                    CheckStoresAndAddtoDatabase(stores);
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            return View("InkeyImport");
+        }
+
+        [HttpPost]
+        public ActionResult ReadExcelStoresUS(System.Web.HttpPostedFileBase upload)
+        {
+
+            try
+            {
+                string test = Path.GetExtension(upload.FileName);
+                if (Path.GetExtension(upload.FileName) == ".xlsx" || Path.GetExtension(upload.FileName) == ".xls")
+                {
+                    ExcelPackage package = new ExcelPackage(upload.InputStream);
+
+                    List<InkeyStoresU> stores = new List<InkeyStoresU>();
+
+                    stores = ExcelHelper.PopulateStoresUS(package.Workbook.Worksheets.FirstOrDefault(), true).ToList();
+
+                    CheckStoresAndAddtoDatabaseUS(stores);
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            return View("InkeyImport");
+        }
+
 
 
         private void CheckQuestionsandAddtoDatabase(List<InkeyAnswer> attendeesToAdd)
@@ -316,6 +393,48 @@ namespace BePreferenceCentre.Controllers
                     foreach (InkeyAnswer question in attendeesToAdd)
                     {
                         db.InkeyAnswers.Add(question);
+                        db.SaveChanges();
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        private void CheckStoresAndAddtoDatabase(List<InkeyStore> storesToAdd)
+        {
+            try
+            {
+                using (var db = new BePreferencesEntities())
+                {
+                    foreach (InkeyStore store in storesToAdd)
+                    {
+                        db.InkeyStores.Add(store);
+                        db.SaveChanges();
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        private void CheckStoresAndAddtoDatabaseUS(List<InkeyStoresU> storesToAdd)
+        {
+            try
+            {
+                using (var db = new BePreferencesEntities())
+                {
+                    foreach (InkeyStoresU store in storesToAdd)
+                    {
+                        db.InkeyStoresUS.Add(store);
                         db.SaveChanges();
 
                     }

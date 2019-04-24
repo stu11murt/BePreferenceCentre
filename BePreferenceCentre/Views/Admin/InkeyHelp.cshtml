@@ -30,17 +30,26 @@
         </div>
     </div>
     <div class="row" id="inkey-button">
-        <div class="help-buttons col-lg-3">
+        <div class="help-buttons col-lg-2">
             <a href="@Url.Action("InkeyAnswerForm", "Admin")" class="btn btn-primary">Inkey Question Form</a>
         </div>
-        <div class="help-buttons col-lg-3" ">
+        <div class="help-buttons col-lg-2">
             <a href="@Url.Action("InkeyImport", "Admin")" class="btn btn-secondary float-right">Import Questions</a>
         </div>
-        <div class="help-buttons col-lg-3" ">
+        <div class="help-buttons col-lg-2">
+            <a href="@Url.Action("ImportStores", "Admin")" class="btn btn-secondary float-right">Import Stores</a>
+        </div>
+        <div class="help-buttons col-lg-2">
             <a href="@Url.Action("UserQuestions", "Admin")" class="btn btn-secondary float-right">User Questions</a>
         </div>
-        <div class="help-buttons col-lg-3" ">
+        <div class="help-buttons col-lg-2">
             <a href="@Url.Action("Download", "Admin")" id="savFile" class="btn btn-danger">Save File</a>
+        </div>
+        <div class="help-buttons col-lg-2">
+            <a href="@Url.Action("DownloadStores", "Admin")" id="savFile" class="btn btn-warning">Export Stores</a>
+        </div>
+        <div class="help-buttons col-lg-2">
+            <a href="@Url.Action("DownloadStoresUS", "Admin")" id="savFile" class="btn btn-warning">Export Stores (US)</a>
         </div>
     </div>
 

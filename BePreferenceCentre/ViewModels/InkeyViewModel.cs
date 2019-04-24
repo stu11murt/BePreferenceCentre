@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using BePreferenceCentre.DAL;
-using BePreferenceCentre.ViewModels;
 using Newtonsoft.Json;
-using BePreferenceCentre.Helpers;
-using System.ComponentModel;
+
 
 namespace BePreferenceCentre.ViewModels
 {

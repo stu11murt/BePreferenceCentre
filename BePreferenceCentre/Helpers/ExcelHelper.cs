@@ -58,6 +58,134 @@ namespace BePreferenceCentre.Helpers
         }
 
 
+        public static IEnumerable<InkeyStore> PopulateStores(ExcelWorksheet workSheet, bool firstRowHeader)
+        {
+            IList<InkeyStore> stores = new List<InkeyStore>();
+
+            if (workSheet != null)
+            {
+                Dictionary<string, int> header = new Dictionary<string, int>();
+
+                for (int rowIndex = workSheet.Dimension.Start.Row; rowIndex <= workSheet.Dimension.End.Row; rowIndex++)
+                {
+                    //Assume the first row is the header. Then use the column match ups by name to determine the index.
+                    //This will allow you to have the order of the columns change without any affect.
+
+                    if (rowIndex == 1 && firstRowHeader)
+                    {
+                        header = ExcelHelper.GetExcelHeader(workSheet, rowIndex);
+                    }
+                    else
+                    {
+                        if (!string.IsNullOrEmpty(ExcelHelper.ParseWorksheetValue(workSheet, header, rowIndex, "DC")))
+                        {
+                            stores.Add(new InkeyStore
+                            {
+                               
+                                City = ParseWorksheetValue(workSheet, header, rowIndex, "city"),
+                                Region = ParseWorksheetValue(workSheet, header, rowIndex, "Region"),
+                                Address = "<a href='https://maps.google.com/?q=" + ParseWorksheetValue(workSheet, header, rowIndex, "address") + ", Canada' target='_blank' >" + ParseWorksheetValue(workSheet, header, rowIndex, "address") + "</a>",
+                                StoreName = ParseWorksheetValue(workSheet, header, rowIndex, "store name"),
+                                DC = Convert.ToInt32(ParseWorksheetValue(workSheet, header, rowIndex, "DC")),
+                                StoreRegion = ParseWorksheetValue(workSheet, header, rowIndex, "region"),                                
+                                Store = Convert.ToInt32(ParseWorksheetValue(workSheet, header, rowIndex, "Store")),
+                                ItemNum = ParseWorksheetValue(workSheet, header, rowIndex, "Item Num"),
+                                ItemDesc = ParseWorksheetValue(workSheet, header, rowIndex, "Item Desc")
+                                
+                            });
+                        }
+
+                    }
+                }
+            }
+
+            return stores;
+        }
+
+        public static IEnumerable<InkeyStore> PopulateStoresAmended(ExcelWorksheet workSheet, bool firstRowHeader)
+        {
+            IList<InkeyStore> stores = new List<InkeyStore>();
+
+            if (workSheet != null)
+            {
+                Dictionary<string, int> header = new Dictionary<string, int>();
+
+                for (int rowIndex = workSheet.Dimension.Start.Row; rowIndex <= workSheet.Dimension.End.Row; rowIndex++)
+                {
+                    //Assume the first row is the header. Then use the column match ups by name to determine the index.
+                    //This will allow you to have the order of the columns change without any affect.
+
+                    if (rowIndex == 1 && firstRowHeader)
+                    {
+                        header = ExcelHelper.GetExcelHeader(workSheet, rowIndex);
+                    }
+                    else
+                    {
+                        if (!string.IsNullOrEmpty(ExcelHelper.ParseWorksheetValue(workSheet, header, rowIndex, "NO")))
+                        {
+                            stores.Add(new InkeyStore
+                            {
+
+                                City = ParseWorksheetValue(workSheet, header, rowIndex, "CITY"),
+                                Region = ParseWorksheetValue(workSheet, header, rowIndex, "REGION"),
+                                Address = "<a href='https://maps.google.com/?q=" + ParseWorksheetValue(workSheet, header, rowIndex, "NO") + " " + ParseWorksheetValue(workSheet, header, rowIndex, "STREET") + ", " + ParseWorksheetValue(workSheet, header, rowIndex, "PCODE") + ", Canada' target='_blank' >" + ParseWorksheetValue(workSheet, header, rowIndex, "NO") + " " + ParseWorksheetValue(workSheet, header, rowIndex, "STREET") + " " + ParseWorksheetValue(workSheet, header, rowIndex, "PCODE") + "</a>",
+                                StoreName = ParseWorksheetValue(workSheet, header, rowIndex, "NO") + " " + ParseWorksheetValue(workSheet, header, rowIndex, "STREET"),
+                                StoreRegion = ParseWorksheetValue(workSheet, header, rowIndex, "REGION"),
+                                Store = Convert.ToInt32(ParseWorksheetValue(workSheet, header, rowIndex, "STORE NUMBER")),
+                                ItemNum = ParseWorksheetValue(workSheet, header, rowIndex, "PHONE"),
+                                ItemDesc = ParseWorksheetValue(workSheet, header, rowIndex, "PROV")
+
+                            });
+                        }
+
+                    }
+                }
+            }
+
+            return stores;
+        }
+
+
+        public static IEnumerable<InkeyStoresU> PopulateStoresUS(ExcelWorksheet workSheet, bool firstRowHeader)
+        {
+            IList<InkeyStoresU> stores = new List<InkeyStoresU>();
+
+            if (workSheet != null)
+            {
+                Dictionary<string, int> header = new Dictionary<string, int>();
+
+                for (int rowIndex = workSheet.Dimension.Start.Row; rowIndex <= workSheet.Dimension.End.Row; rowIndex++)
+                {
+                    //Assume the first row is the header. Then use the column match ups by name to determine the index.
+                    //This will allow you to have the order of the columns change without any affect.
+
+                    if (rowIndex == 1 && firstRowHeader)
+                    {
+                        header = ExcelHelper.GetExcelHeader(workSheet, rowIndex);
+                    }
+                    else
+                    {
+                        if (!string.IsNullOrEmpty(ExcelHelper.ParseWorksheetValue(workSheet, header, rowIndex, "Store")))
+                        {
+                            stores.Add(new InkeyStoresU
+                            {
+
+                                City = ParseWorksheetValue(workSheet, header, rowIndex, "city"),
+                                Region = ParseWorksheetValue(workSheet, header, rowIndex, "Region"),
+                                Address = "<a href='https://maps.google.com/?q=" + ParseWorksheetValue(workSheet, header, rowIndex, "Address") + "</a>",
+                                StoreName = ParseWorksheetValue(workSheet, header, rowIndex, "Store Name"),
+                                StoreRegion = ParseWorksheetValue(workSheet, header, rowIndex, "region"),
+                                Store = ParseWorksheetValue(workSheet, header, rowIndex, "Store")
+                            });
+                        }
+
+                    }
+                }
+            }
+
+            return stores;
+        }
+
 
         public static Dictionary<string, int> GetExcelHeader(ExcelWorksheet workSheet, int rowIndex)
         {

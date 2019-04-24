@@ -71,6 +71,34 @@
           <Property Name="Tag" Type="nvarchar" MaxLength="512" Nullable="false" />
           <Property Name="ProductId" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="InkeyStores">
+          <Key>
+            <PropertyRef Name="InkeyStoresId" />
+          </Key>
+          <Property Name="City" Type="nvarchar" MaxLength="150" />
+          <Property Name="Region" Type="nvarchar" MaxLength="20" />
+          <Property Name="Address" Type="nvarchar" MaxLength="250" />
+          <Property Name="StoreName" Type="nvarchar" MaxLength="250" />
+          <Property Name="InkeyStoresId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DC" Type="int" />
+          <Property Name="StoreRegion" Type="nvarchar" MaxLength="50" />
+          <Property Name="Store" Type="int" />
+          <Property Name="ItemNum" Type="nvarchar" MaxLength="50" />
+          <Property Name="ItemDesc" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="InkeyStoresUS">
+          <Key>
+            <PropertyRef Name="InkeyStoresUSId" />
+          </Key>
+          <Property Name="StoreName" Type="nvarchar" MaxLength="250" />
+          <Property Name="Region" Type="nvarchar" MaxLength="20" />
+          <Property Name="Address" Type="nvarchar" MaxLength="250" />
+          <Property Name="City" Type="nvarchar" MaxLength="150" />
+          <Property Name="District" Type="nvarchar" MaxLength="150" />
+          <Property Name="InkeyStoresUSId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StoreRegion" Type="nvarchar" MaxLength="50" />
+          <Property Name="Store" Type="nvarchar" MaxLength="20" />
+        </EntityType>
         <EntityType Name="InkeyUserQuestions">
           <Key>
             <PropertyRef Name="InkeyUserQuestionsId" />
@@ -86,6 +114,8 @@
           <EntitySet Name="InkeyAnswers" EntityType="Self.InkeyAnswers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InkeyProducts" EntityType="Self.InkeyProducts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InkeyProductTag" EntityType="Self.InkeyProductTag" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InkeyStores" EntityType="Self.InkeyStores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InkeyStoresUS" EntityType="Self.InkeyStoresUS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InkeyUserQuestions" EntityType="Self.InkeyUserQuestions" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -95,10 +125,12 @@
         <EntityContainer Name="BePreferencesEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="BEMailingLists" EntityType="BePreferencesModel.BEMailingList" />
           <EntitySet Name="BEMemberLists" EntityType="BePreferencesModel.BEMemberList" />
-          <EntitySet Name="InkeyProductTags" EntityType="BePreferencesModel.InkeyProductTag" />
-          <EntitySet Name="InkeyUserQuestions" EntityType="BePreferencesModel.InkeyUserQuestion" />
           <EntitySet Name="InkeyAnswers" EntityType="BePreferencesModel.InkeyAnswer" />
           <EntitySet Name="InkeyProducts" EntityType="BePreferencesModel.InkeyProduct" />
+          <EntitySet Name="InkeyProductTags" EntityType="BePreferencesModel.InkeyProductTag" />
+          <EntitySet Name="InkeyUserQuestions" EntityType="BePreferencesModel.InkeyUserQuestion" />
+          <EntitySet Name="InkeyStores" EntityType="BePreferencesModel.InkeyStore" />
+          <EntitySet Name="InkeyStoresUS" EntityType="BePreferencesModel.InkeyStoresU" />
         </EntityContainer>
         <EntityType Name="BEMailingList">
           <Key>
@@ -126,23 +158,6 @@
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ListId" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
           <Property Name="Archived" Type="Boolean" Nullable="false" />
-        </EntityType>
-        <EntityType Name="InkeyProductTag">
-          <Key>
-            <PropertyRef Name="InkeyProductTagsId" />
-          </Key>
-          <Property Name="InkeyProductTagsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Tag" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
-          <Property Name="ProductId" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="InkeyUserQuestion">
-          <Key>
-            <PropertyRef Name="InkeyUserQuestionsId" />
-          </Key>
-          <Property Name="InkeyUserQuestionsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserQuestion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="userEmail" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="InkeyAnswer">
           <Key>
@@ -174,6 +189,51 @@
           <Property Name="ProductImageLink" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="ProductLink" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
           <Property Name="PhoneticName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="InkeyProductTag">
+          <Key>
+            <PropertyRef Name="InkeyProductTagsId" />
+          </Key>
+          <Property Name="InkeyProductTagsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tag" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InkeyUserQuestion">
+          <Key>
+            <PropertyRef Name="InkeyUserQuestionsId" />
+          </Key>
+          <Property Name="InkeyUserQuestionsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserQuestion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="userEmail" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="InkeyStore">
+          <Key>
+            <PropertyRef Name="InkeyStoresId" />
+          </Key>
+          <Property Name="City" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Region" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="StoreName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="InkeyStoresId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DC" Type="Int32" />
+          <Property Name="StoreRegion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Store" Type="Int32" />
+          <Property Name="ItemNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ItemDesc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="InkeyStoresU">
+          <Key>
+            <PropertyRef Name="InkeyStoresUSId" />
+          </Key>
+          <Property Name="StoreName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Region" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="District" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="InkeyStoresUSId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StoreRegion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Store" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -210,25 +270,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="InkeyProductTags">
-            <EntityTypeMapping TypeName="BePreferencesModel.InkeyProductTag">
-              <MappingFragment StoreEntitySet="InkeyProductTag">
-                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-                <ScalarProperty Name="Tag" ColumnName="Tag" />
-                <ScalarProperty Name="InkeyProductTagsId" ColumnName="InkeyProductTagsId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="InkeyUserQuestions">
-            <EntityTypeMapping TypeName="BePreferencesModel.InkeyUserQuestion">
-              <MappingFragment StoreEntitySet="InkeyUserQuestions">
-                <ScalarProperty Name="userEmail" ColumnName="userEmail" />
-                <ScalarProperty Name="Created" ColumnName="Created" />
-                <ScalarProperty Name="UserQuestion" ColumnName="UserQuestion" />
-                <ScalarProperty Name="InkeyUserQuestionsId" ColumnName="InkeyUserQuestionsId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="InkeyAnswers">
             <EntityTypeMapping TypeName="BePreferencesModel.InkeyAnswer">
               <MappingFragment StoreEntitySet="InkeyAnswers">
@@ -259,6 +300,55 @@
                 <ScalarProperty Name="ProductImageLink" ColumnName="ProductImageLink" />
                 <ScalarProperty Name="ProductName" ColumnName="ProductName" />
                 <ScalarProperty Name="InkeyProductsId" ColumnName="InkeyProductsId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InkeyProductTags">
+            <EntityTypeMapping TypeName="BePreferencesModel.InkeyProductTag">
+              <MappingFragment StoreEntitySet="InkeyProductTag">
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="Tag" ColumnName="Tag" />
+                <ScalarProperty Name="InkeyProductTagsId" ColumnName="InkeyProductTagsId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InkeyUserQuestions">
+            <EntityTypeMapping TypeName="BePreferencesModel.InkeyUserQuestion">
+              <MappingFragment StoreEntitySet="InkeyUserQuestions">
+                <ScalarProperty Name="userEmail" ColumnName="userEmail" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="UserQuestion" ColumnName="UserQuestion" />
+                <ScalarProperty Name="InkeyUserQuestionsId" ColumnName="InkeyUserQuestionsId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InkeyStores">
+            <EntityTypeMapping TypeName="BePreferencesModel.InkeyStore">
+              <MappingFragment StoreEntitySet="InkeyStores">
+                <ScalarProperty Name="ItemDesc" ColumnName="ItemDesc" />
+                <ScalarProperty Name="ItemNum" ColumnName="ItemNum" />
+                <ScalarProperty Name="Store" ColumnName="Store" />
+                <ScalarProperty Name="StoreRegion" ColumnName="StoreRegion" />
+                <ScalarProperty Name="DC" ColumnName="DC" />
+                <ScalarProperty Name="InkeyStoresId" ColumnName="InkeyStoresId" />
+                <ScalarProperty Name="StoreName" ColumnName="StoreName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Region" ColumnName="Region" />
+                <ScalarProperty Name="City" ColumnName="City" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InkeyStoresUS">
+            <EntityTypeMapping TypeName="BePreferencesModel.InkeyStoresU">
+              <MappingFragment StoreEntitySet="InkeyStoresUS">
+                <ScalarProperty Name="Store" ColumnName="Store" />
+                <ScalarProperty Name="StoreRegion" ColumnName="StoreRegion" />
+                <ScalarProperty Name="InkeyStoresUSId" ColumnName="InkeyStoresUSId" />
+                <ScalarProperty Name="District" ColumnName="District" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Region" ColumnName="Region" />
+                <ScalarProperty Name="StoreName" ColumnName="StoreName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
